@@ -434,6 +434,7 @@ class Y extends MeshPhysicalMaterial {
 
   constructor(params: any) {
     super(params);
+    // @ts-ignore - Three.js shader material defines property
     this.defines = { USE_UV: '' };
     this.onBeforeCompile = shader => {
       Object.assign(shader.uniforms, this.uniforms);

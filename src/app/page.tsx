@@ -20,8 +20,8 @@ export default function Home() {
           <main suppressHydrationWarning>
             <HeroSection />
             <ServicesSection />
-            <AboutSection />
             <PortfolioSection />
+            <AboutSection />
             <ContactSection />
           </main>
         </ClickSpark>

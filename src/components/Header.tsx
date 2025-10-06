@@ -1,11 +1,9 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
-import { usePathname } from "next/navigation"
 
 const navItems = [
   { name: "Home", href: "#home" },
@@ -17,9 +15,7 @@ const navItems = [
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true)
   const [activeSection, setActiveSection] = useState('home')
-  const pathname = usePathname()
 
   // Smooth scroll function
   const scrollToSection = (sectionId: string) => {
@@ -36,16 +32,31 @@ const Header = () => {
   // Scroll spy functionality to detect active section
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'services', 'about', 'portfolio', 'contact']
-      const scrollPosition = window.scrollY + 100 // Offset for better detection
+      const sections = ['home', 'services', 'portfolio', 'about', 'contact']
+      const scrollPosition = window.scrollY + 150 // Increased offset for better detection
 
-      for (let i = sections.length - 1; i >= 0; i--) {
+      let currentSection = 'home'
+
+      for (let i = 0; i < sections.length; i++) {
         const section = document.getElementById(sections[i])
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(sections[i])
-          break
+        if (section) {
+          const sectionTop = section.offsetTop
+          const sectionHeight = section.offsetHeight
+          const sectionBottom = sectionTop + sectionHeight
+
+          // Check if scroll position is within this section
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            currentSection = sections[i]
+            break
+          }
+          // If we're past the current section, it becomes the active one
+          else if (scrollPosition >= sectionTop) {
+            currentSection = sections[i]
+          }
         }
       }
+
+      setActiveSection(currentSection)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -97,12 +108,12 @@ const Header = () => {
 
     const handleHideHeader = () => {
       clearTimeout(showTimeout)
-      hideTimeout = setTimeout(() => setIsHeaderVisible(false), 100)
+      hideTimeout = setTimeout(() => {}, 100)
     }
 
     const handleShowHeader = () => {
       clearTimeout(hideTimeout)
-      showTimeout = setTimeout(() => setIsHeaderVisible(true), 100)
+      showTimeout = setTimeout(() => {}, 100)
     }
 
     window.addEventListener("hideHeader", handleHideHeader)
@@ -116,10 +127,6 @@ const Header = () => {
     }
   }, [])
 
-  // Reset header visibility when pathname changes
-  useEffect(() => {
-    setIsHeaderVisible(true)
-  }, [pathname])
 
   return (
     <div suppressHydrationWarning>
@@ -149,8 +156,8 @@ const Header = () => {
 
       {/* Central Navigation Only */}
       <motion.div
-        className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-[100]"
-        initial={{ y: 100 }}
+        className="fixed top-6 left-1/2 transform -translate-x-1/2 z-[100]"
+        initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{
           duration: 0.8,
@@ -186,7 +193,7 @@ const Header = () => {
         </nav>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden mb-4" suppressHydrationWarning>
+        <div className="md:hidden mt-4" suppressHydrationWarning>
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)} 
             className="text-white p-4 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-lg hover:bg-white/10 transition-colors duration-200"
@@ -234,7 +241,7 @@ const Header = () => {
           duration: 0.3,
           ease: [0.25, 0.46, 0.45, 0.94],
         }}
-        className="md:hidden overflow-hidden backdrop-blur-2xl border border-white/10 rounded-full mb-20 mx-8 shadow-lg"
+        className="md:hidden overflow-hidden backdrop-blur-2xl border border-white/10 rounded-full mt-4 mx-8 shadow-lg"
         style={{
           background: 'rgba(255, 255, 255, 0.05)',
           backdropFilter: 'blur(20px)',
