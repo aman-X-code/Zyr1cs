@@ -1,6 +1,13 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
-import UnicornScene from "unicornstudio-react";
+import dynamic from "next/dynamic";
+
+const UnicornScene = dynamic(() => import("unicornstudio-react"), {
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-black" />,
+});
 
 export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({
@@ -24,8 +31,7 @@ export const useWindowSize = () => {
     };
 
     window.addEventListener('resize', handleResize);
-    
-    // Remove event listener on cleanup
+
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -35,15 +41,14 @@ export const useWindowSize = () => {
 export const Component = () => {
   const { windowSize, isClient } = useWindowSize();
 
-  // Always render the same structure to prevent hydration mismatches
   return (
     <div className={cn("flex flex-col items-center w-full h-full", isClient ? "" : "bg-black")} suppressHydrationWarning>
-      {isClient ? (
+      {isClient && windowSize.width > 0 ? (
         <div suppressHydrationWarning>
-          <UnicornScene 
-            production={true} 
-            projectId="ed7SJMvTJEVxfqzypOOQ" 
-            width={windowSize.width} 
+          <UnicornScene
+            production={true}
+            projectId="ed7SJMvTJEVxfqzypOOQ"
+            width={windowSize.width}
             height={windowSize.height}
           />
         </div>

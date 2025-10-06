@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: false,
+  transpilePackages: ['unicornstudio-react'],
+  experimental: {
+    optimizePackageImports: ['unicornstudio-react'],
+  },
 };
 
 export default nextConfig;
