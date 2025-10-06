@@ -7,12 +7,12 @@ import BlurText from "./BlurText";
 export function ServicesSection() {
 
   return (
-    <section id="services" className="py-20 bg-black relative overflow-hidden" suppressHydrationWarning>
-      <div className="container mx-auto px-16 relative z-10" suppressHydrationWarning>
+    <section id="services" className="py-12 sm:py-16 md:py-20 bg-black relative overflow-hidden" suppressHydrationWarning>
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 relative z-10" suppressHydrationWarning>
         {/* Section Header */}
-        <div className="mb-16" suppressHydrationWarning>
-          <div className="flex items-baseline mb-6" suppressHydrationWarning>
-            <h2 className="text-8xl md:text-9xl lg:text-[12rem] font-bold text-white mr-4" style={{ fontFamily: "'Druk Trial', sans-serif" }} suppressHydrationWarning>
+        <div className="mb-8 sm:mb-12 md:mb-16" suppressHydrationWarning>
+          <div className="flex items-baseline mb-4 sm:mb-6" suppressHydrationWarning>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-white mr-2 sm:mr-4" style={{ fontFamily: "'Druk Trial', sans-serif" }} suppressHydrationWarning>
               <BlurText
                 text="OUR SERVICE"
                 delay={200}
@@ -21,17 +21,17 @@ export function ServicesSection() {
                 className=""
               />
             </h2>
-             <div className="w-4 h-4 bg-cyan-300 rounded-full" suppressHydrationWarning></div>
+             <div className="w-3 h-3 sm:w-4 sm:h-4 bg-cyan-300 rounded-full" suppressHydrationWarning></div>
           </div>
-          <p className="text-lg text-gray-300 max-w-2xl leading-relaxed" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
+          <p className="text-base sm:text-lg text-gray-300 max-w-2xl leading-relaxed" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
             Good design speaks. Great design flirts.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center" suppressHydrationWarning>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 justify-items-center" suppressHydrationWarning>
           {/* Web Development */}
-          <PixelCard variant="blue" className="w-[340px] h-auto min-h-[300px]">
+          <PixelCard variant="blue" className="w-full max-w-[340px] h-auto min-h-[280px] sm:min-h-[300px]">
             <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between z-10" suppressHydrationWarning>
               {/* Service Title */}
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
@@ -59,7 +59,7 @@ export function ServicesSection() {
           </PixelCard>
 
           {/* Mobile App */}
-          <PixelCard variant="blue" className="w-[340px] h-auto min-h-[300px]">
+          <PixelCard variant="blue" className="w-full max-w-[340px] h-auto min-h-[280px] sm:min-h-[300px]">
             <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between z-10" suppressHydrationWarning>
               {/* Service Title */}
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
@@ -80,7 +80,7 @@ export function ServicesSection() {
           </PixelCard>
 
           {/* AI Automation */}
-          <PixelCard variant="blue" className="w-[340px] h-auto min-h-[300px]">
+          <PixelCard variant="blue" className="w-full max-w-[340px] h-auto min-h-[280px] sm:min-h-[300px]">
             <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between z-10" suppressHydrationWarning>
               {/* Service Title */}
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
@@ -101,7 +101,7 @@ export function ServicesSection() {
           </PixelCard>
 
           {/* Cloud Services */}
-          <PixelCard variant="blue" className="w-[340px] h-auto min-h-[300px]">
+          <PixelCard variant="blue" className="w-full max-w-[340px] h-auto min-h-[280px] sm:min-h-[300px]">
             <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between z-10" suppressHydrationWarning>
               {/* Service Title */}
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>

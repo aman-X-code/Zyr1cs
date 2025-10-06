@@ -132,7 +132,7 @@ const Header = () => {
     <div suppressHydrationWarning>
       {/* Company Logo - Outside Header, Positioned Left */}
       <motion.div
-        className="fixed top-4 left-8 z-[200]"
+        className="fixed top-2 sm:top-4 left-2 sm:left-4 md:left-8 z-[200]"
         initial={{ y: 0 }}
         animate={{ y: 0 }}
         transition={{
@@ -143,12 +143,12 @@ const Header = () => {
         suppressHydrationWarning
       >
         <button onClick={() => scrollToSection('#home')} suppressHydrationWarning>
-          <Image 
-            src="/images/white.png" 
-            alt="Zyr1cs Logo" 
-            width={180} 
-            height={60} 
-            className="h-16 w-auto object-contain"
+          <Image
+            src="/images/white.png"
+            alt="Zyr1cs Logo"
+            width={180}
+            height={60}
+            className="h-10 sm:h-12 md:h-16 w-auto object-contain"
             suppressHydrationWarning
           />
         </button>
@@ -156,7 +156,7 @@ const Header = () => {
 
       {/* Central Navigation Only */}
       <motion.div
-        className="fixed top-6 left-1/2 transform -translate-x-1/2 z-[100]"
+        className="fixed top-3 sm:top-4 md:top-6 left-1/2 transform -translate-x-1/2 z-[100]"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{
@@ -166,15 +166,15 @@ const Header = () => {
         }}
         suppressHydrationWarning
       >
-        {/* Navigation Links Container */}
-        <nav className="flex items-center space-x-6 px-6 py-3 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-lg" suppressHydrationWarning>
+        {/* Navigation Links Container - Hidden on mobile */}
+        <nav className="hidden md:flex items-center space-x-4 lg:space-x-6 px-4 lg:px-6 py-2 lg:py-3 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-lg" suppressHydrationWarning>
           {navItems.map((item) => {
             const isActive = activeSection === item.href.replace('#', '')
             return (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className={`relative font-medium transition-all duration-400 group text-base ${
+                className={`relative font-medium transition-all duration-400 group text-sm lg:text-base ${
                   isActive ? "text-cyan-300" : "text-white hover:text-cyan-300"
                 }`}
                 style={{
@@ -193,23 +193,21 @@ const Header = () => {
         </nav>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden mt-4" suppressHydrationWarning>
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)} 
-            className="text-white p-4 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-lg hover:bg-white/10 transition-colors duration-200"
-            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-navigation"
-            suppressHydrationWarning
-          >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden text-white p-3 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-lg hover:bg-white/10 transition-colors duration-200"
+          aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-navigation"
+          suppressHydrationWarning
+        >
+          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </motion.div>
 
-      {/* CTA Button - Right Corner */}
+      {/* CTA Button - Right Corner - Hidden on mobile */}
       <motion.div
-        className="fixed top-6 right-8 z-[200]"
+        className="hidden md:block fixed top-3 sm:top-4 md:top-6 right-2 sm:right-4 md:right-8 z-[200]"
         initial={{ y: 0 }}
         animate={{ y: 0 }}
         transition={{
@@ -219,10 +217,10 @@ const Header = () => {
         }}
         suppressHydrationWarning
       >
-        <button 
+        <button
           onClick={() => scrollToSection('#contact')}
-          className="px-6 py-3 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-lg text-white font-medium transition-all duration-200 text-base hover:bg-white/10" 
-          style={{ fontFamily: "'Unbounded', sans-serif" }} 
+          className="px-4 lg:px-6 py-2 lg:py-3 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-lg text-white font-medium transition-all duration-200 text-sm lg:text-base hover:bg-white/10"
+          style={{ fontFamily: "'Unbounded', sans-serif" }}
           suppressHydrationWarning
         >
           Get Started
@@ -241,7 +239,7 @@ const Header = () => {
           duration: 0.3,
           ease: [0.25, 0.46, 0.45, 0.94],
         }}
-        className="md:hidden overflow-hidden backdrop-blur-2xl border border-white/10 rounded-full mt-4 mx-8 shadow-lg"
+        className="md:hidden overflow-hidden backdrop-blur-2xl border border-white/10 rounded-2xl fixed top-20 left-4 right-4 shadow-lg"
         style={{
           background: 'rgba(255, 255, 255, 0.05)',
           backdropFilter: 'blur(20px)',
@@ -260,7 +258,7 @@ const Header = () => {
             delay: isMenuOpen ? 0.1 : 0,
             ease: [0.25, 0.46, 0.45, 0.94],
           }}
-          className="px-3 pb-4 md:px-6 md:pb-6"
+          className="px-3 pb-4"
           suppressHydrationWarning
         >
           <ul className="flex flex-col space-y-0" suppressHydrationWarning>

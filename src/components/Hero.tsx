@@ -18,16 +18,16 @@ export function HeroSection() {
       />
       
       {/* Hero Text Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 -mt-20" suppressHydrationWarning>
-        <div className="text-center -space-y-8" suppressHydrationWarning>
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 -mt-20" suppressHydrationWarning>
+        <div className="text-center -space-y-4 sm:-space-y-6 md:-space-y-8" suppressHydrationWarning>
           {/* Main Headline */}
-          <h1 className="text-8xl md:text-9xl lg:text-[10rem] font-bold text-gray-200 leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1s' }} suppressHydrationWarning>
+          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold text-gray-200 leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1s' }} suppressHydrationWarning>
             Building
           </h1>
-          <h1 className="text-8xl md:text-9xl lg:text-[10rem] font-bold text-gray-200 leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1.3s' }} suppressHydrationWarning>
+          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold text-gray-200 leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1.3s' }} suppressHydrationWarning>
             Extraordinary
           </h1>
-          <h1 className="text-8xl md:text-9xl lg:text-[10rem] font-bold text-gray-200 leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1.6s' }} suppressHydrationWarning>
+          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold text-gray-200 leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1.6s' }} suppressHydrationWarning>
             Digital Solutions
           </h1>
         </div>
