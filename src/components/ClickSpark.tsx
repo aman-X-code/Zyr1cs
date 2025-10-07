@@ -134,12 +134,12 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     };
   }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
 
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>): void => {
+  const handleInteraction = useCallback((clientX: number, clientY: number): void => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
 
     const now = performance.now();
     const newSparks: Spark[] = Array.from({ length: sparkCount }, (_, i) => ({
@@ -150,6 +150,17 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     }));
 
     sparksRef.current.push(...newSparks);
+  }, [sparkCount]);
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>): void => {
+    handleInteraction(e.clientX, e.clientY);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>): void => {
+    if (e.changedTouches.length > 0) {
+      const touch = e.changedTouches[0];
+      handleInteraction(touch.clientX, touch.clientY);
+    }
   };
 
   return (
@@ -157,9 +168,11 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
       style={{
         width: '100%',
         height: '100%',
-        position: 'relative'
+        position: 'relative',
+        touchAction: 'pan-y pan-x'
       }}
       onClick={handleClick}
+      onTouchEnd={handleTouchEnd}
       suppressHydrationWarning
     >
       <canvas
