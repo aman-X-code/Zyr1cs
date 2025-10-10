@@ -77,6 +77,7 @@ export function ServicesSection() {
                 <span className="ml-2">→</span>
               </button>
             </div>
+            
           </PixelCard>
 
           {/* AI Automation */}
@@ -98,6 +99,7 @@ export function ServicesSection() {
                 <span className="ml-2">→</span>
               </button>
             </div>
+            
           </PixelCard>
 
           {/* Cloud Services */}
@@ -119,6 +121,7 @@ export function ServicesSection() {
                 <span className="ml-2">→</span>
               </button>
             </div>
+            
           </PixelCard>
         </div>
       </div>
