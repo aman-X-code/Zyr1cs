@@ -25,21 +25,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head suppressHydrationWarning>
-        <link href="https://fonts.cdnfonts.com/css/druk-trial" rel="stylesheet" suppressHydrationWarning />
-        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet" suppressHydrationWarning />
-        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet" suppressHydrationWarning />
+      <head>
+        <link href="https://fonts.cdnfonts.com/css/druk-trial" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarning
       >
-        <div suppressHydrationWarning>
-          <Header />
-          <div suppressHydrationWarning>
-            {children}
-          </div>
-        </div>
+        <Header />
+        {children}
       </body>
     </html>
   );

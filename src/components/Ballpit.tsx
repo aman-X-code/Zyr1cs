@@ -541,10 +541,10 @@ function createPointerData(options: Partial<PointerData> & { domElement: HTMLEle
       document.body.addEventListener('pointerleave', onPointerLeave as EventListener);
       document.body.addEventListener('click', onPointerClick as EventListener);
 
-      document.body.addEventListener('touchstart', onTouchStart as EventListener, { passive: false });
-      document.body.addEventListener('touchmove', onTouchMove as EventListener, { passive: false });
-      document.body.addEventListener('touchend', onTouchEnd as EventListener, { passive: false });
-      document.body.addEventListener('touchcancel', onTouchEnd as EventListener, { passive: false });
+      document.body.addEventListener('touchstart', onTouchStart as EventListener, { passive: true });
+      document.body.addEventListener('touchmove', onTouchMove as EventListener, { passive: true });
+      document.body.addEventListener('touchend', onTouchEnd as EventListener, { passive: true });
+      document.body.addEventListener('touchcancel', onTouchEnd as EventListener, { passive: true });
       globalPointerActive = true;
     }
   }
@@ -589,11 +589,11 @@ function processPointerInteraction() {
 
 function onTouchStart(e: TouchEvent) {
   if (e.touches.length > 0) {
-    e.preventDefault();
     pointerPosition.set(e.touches[0].clientX, e.touches[0].clientY);
     for (const [elem, data] of pointerMap) {
       const rect = elem.getBoundingClientRect();
       if (isInside(rect)) {
+        e.preventDefault();
         data.touching = true;
         updatePointerData(data, rect);
         if (!data.hover) {
@@ -608,12 +608,12 @@ function onTouchStart(e: TouchEvent) {
 
 function onTouchMove(e: TouchEvent) {
   if (e.touches.length > 0) {
-    e.preventDefault();
     pointerPosition.set(e.touches[0].clientX, e.touches[0].clientY);
     for (const [elem, data] of pointerMap) {
       const rect = elem.getBoundingClientRect();
       updatePointerData(data, rect);
       if (isInside(rect)) {
+        e.preventDefault();
         if (!data.hover) {
           data.hover = true;
           data.touching = true;

@@ -8,7 +8,7 @@ import { ContactSection } from "@/components/ContactSection";
 
 export default function HomeClient() {
   return (
-    <main suppressHydrationWarning>
+    <main>
       <HeroSection />
       <ServicesSection />
       <PortfolioSection />
