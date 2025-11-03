@@ -14,6 +14,7 @@ interface HoverSliderImageProps {
   imageUrl: string
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface HoverSliderProps {}
 
 interface HoverSliderContextValue {
@@ -173,14 +174,17 @@ export const HoverSliderCard = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement> & { index: number }
 >(({ index, children, className, ...props }, ref) => {
   const { activeSlide } = useHoverSliderContext()
+  const animateState = activeSlide === index ? "visible" : "hidden"
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { animate, ...restProps } = props as any
   return (
     <motion.div
       ref={ref}
       className={cn("inline-block align-middle", className)}
       transition={{ ease: [0.33, 1, 0.68, 1], duration: 0.8 }}
       variants={clipPathVariants}
-      animate={activeSlide === index ? "visible" : "hidden"}
-      {...props}
+      animate={animateState}
+      {...restProps}
     >
       {children}
     </motion.div>
