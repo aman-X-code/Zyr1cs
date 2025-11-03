@@ -14,8 +14,9 @@ interface HoverSliderImageProps {
   imageUrl: string
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface HoverSliderProps {}
+interface HoverSliderProps {
+  onSlideChange?: (index: number) => void;
+}
 
 interface HoverSliderContextValue {
   activeSlide: number
@@ -44,12 +45,52 @@ function useHoverSliderContext() {
 export const HoverSlider = React.forwardRef<
   HTMLElement,
   React.HTMLAttributes<HTMLElement> & HoverSliderProps
->(({ children, className, ...props }, ref) => {
+>(({ children, className, onSlideChange, ...props }, ref) => {
   const [activeSlide, setActiveSlide] = React.useState<number>(0)
+  const [isHovering, setIsHovering] = React.useState<boolean>(false)
+  const totalSlides: number = React.useMemo(() => {
+    return React.Children.toArray(children).reduce((count: number, child) => {
+      if (React.isValidElement(child) && (child.props as any).children) {
+        const grandChildren = React.Children.toArray((child.props as any).children)
+        const sliderWrap = grandChildren.find((gc: any) => 
+          React.isValidElement(gc) && gc.type === HoverSliderImageWrap
+        )
+        if (sliderWrap && React.isValidElement(sliderWrap)) {
+          return React.Children.count((sliderWrap.props as any).children)
+        }
+      }
+      return count
+    }, 0)
+  }, [children])
+
   const changeSlide = React.useCallback(
-    (index: number) => setActiveSlide(index),
-    [setActiveSlide]
+    (index: number) => {
+      setActiveSlide(index)
+      setIsHovering(true)
+      onSlideChange?.(index)
+    },
+    [onSlideChange]
   )
+
+  React.useEffect(() => {
+    if (isHovering || totalSlides === 0) return
+
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % totalSlides)
+    }, 4000)
+
+    return () => clearInterval(interval)
+  }, [isHovering, totalSlides])
+
+  React.useEffect(() => {
+    if (!isHovering) return
+
+    const timeout = setTimeout(() => {
+      setIsHovering(false)
+    }, 8000)
+
+    return () => clearTimeout(timeout)
+  }, [isHovering, activeSlide])
 
   return (
     <HoverSliderContext.Provider value={{ activeSlide, changeSlide }}>

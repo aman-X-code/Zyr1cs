@@ -10,9 +10,131 @@ import TerminalCard from "./TerminalCard";
 import { OrbitingCircles } from "./ui/orbiting-circles";
 import { Icons } from "./Icons";
 import { Particles } from "./ui/Particles";
+import { ServiceDetailModal } from "./ServiceDetailModal";
+import { Info } from "lucide-react";
+
+const serviceDetails = [
+  {
+    title: "WEB DESIGN",
+    description: "We craft stunning, high-performance websites that convert visitors into customers. Our full-stack approach ensures your web presence is fast, secure, and scalable.",
+    process: [
+      { step: "Discovery & Planning", description: "We analyze your business goals, target audience, and competitors to create a strategic roadmap." },
+      { step: "Design & Prototyping", description: "Our designers create pixel-perfect mockups and interactive prototypes for your approval." },
+      { step: "Development", description: "Clean, maintainable code built with modern frameworks and best practices." },
+      { step: "Testing & Launch", description: "Rigorous QA testing across devices and browsers before going live." },
+      { step: "Support & Optimization", description: "Ongoing maintenance, updates, and performance optimization." }
+    ],
+    techStack: [
+      { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+      { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+      { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+      { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+      { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" }
+    ],
+    timeline: "Typical projects take 4-8 weeks from kickoff to launch, depending on complexity and scope.",
+    whyBetter: [
+      "Lightning-fast load times (< 2 seconds) with 95+ PageSpeed scores",
+      "Mobile-first responsive design that works flawlessly on all devices",
+      "SEO-optimized architecture to rank higher in search results",
+      "Scalable infrastructure that grows with your business",
+      "Ongoing support and maintenance included for 3 months post-launch"
+    ]
+  },
+  {
+    title: "MOBILE APPLICATION",
+    description: "Native-quality mobile apps for iOS and Android using a single codebase. We deliver beautiful, performant apps that users love.",
+    process: [
+      { step: "Requirements Analysis", description: "Define features, user flows, and technical requirements for your app." },
+      { step: "UI/UX Design", description: "Create intuitive interfaces following platform-specific design guidelines." },
+      { step: "Cross-Platform Development", description: "Build once, deploy everywhere with React Native or Flutter." },
+      { step: "API Integration", description: "Connect to your backend services and third-party APIs seamlessly." },
+      { step: "App Store Deployment", description: "Handle submission and approval process for both iOS and Android stores." }
+    ],
+    techStack: [
+      { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+      { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
+      { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+      { name: "Redux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" },
+      { name: "Android", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg" },
+      { name: "iOS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" },
+      { name: "SQLite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" },
+      { name: "GraphQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" }
+    ],
+    timeline: "Mobile apps typically take 6-12 weeks from concept to app store launch.",
+    whyBetter: [
+      "70% faster development with cross-platform approach",
+      "Native performance and smooth 60fps animations",
+      "Offline-first architecture for uninterrupted user experience",
+      "Push notifications and real-time updates built-in",
+      "App store optimization to maximize downloads"
+    ]
+  },
+  {
+    title: "AI AUTOMATION",
+    description: "Harness the power of AI to automate repetitive tasks, gain insights from data, and create intelligent user experiences.",
+    process: [
+      { step: "Workflow Analysis", description: "Identify automation opportunities and pain points in your current processes." },
+      { step: "AI Model Selection", description: "Choose the right AI models (GPT, Claude, Gemini) for your specific needs." },
+      { step: "Integration & Training", description: "Integrate AI into your systems and fine-tune models with your data." },
+      { step: "Testing & Refinement", description: "Validate accuracy and refine prompts for optimal results." },
+      { step: "Deployment & Monitoring", description: "Deploy to production with monitoring and continuous improvement." }
+    ],
+    techStack: [
+      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "TensorFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
+      { name: "PyTorch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" },
+      { name: "OpenAI", icon: "https://cdn.simpleicons.org/openai/412991" },
+      { name: "Pandas", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" },
+      { name: "NumPy", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" },
+      { name: "Jupyter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" },
+      { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" }
+    ],
+    timeline: "AI automation projects range from 2-6 weeks depending on complexity and integration requirements.",
+    whyBetter: [
+      "Reduce manual work by 80% with intelligent automation",
+      "24/7 AI-powered customer support with natural conversations",
+      "Data-driven insights and predictions to inform business decisions",
+      "Custom AI models trained on your specific data and use cases",
+      "Seamless integration with existing tools and workflows"
+    ]
+  },
+  {
+    title: "CLOUD SERVICES",
+    description: "Enterprise-grade cloud infrastructure that scales automatically, reduces costs, and ensures 99.9% uptime for your applications.",
+    process: [
+      { step: "Infrastructure Assessment", description: "Evaluate current setup and identify optimization opportunities." },
+      { step: "Architecture Design", description: "Design scalable, fault-tolerant cloud architecture tailored to your needs." },
+      { step: "Migration & Setup", description: "Migrate existing services or build new infrastructure from scratch." },
+      { step: "CI/CD Pipeline", description: "Automate deployments with continuous integration and delivery pipelines." },
+      { step: "Monitoring & Optimization", description: "24/7 monitoring with automated scaling and cost optimization." }
+    ],
+    techStack: [
+      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+      { name: "Azure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
+      { name: "Google Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
+      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+      { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
+      { name: "Terraform", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" },
+      { name: "GitHub Actions", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+      { name: "Jenkins", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" }
+    ],
+    timeline: "Cloud infrastructure projects typically take 3-8 weeks from planning to full deployment.",
+    whyBetter: [
+      "99.9% uptime guarantee with automatic failover and redundancy",
+      "Auto-scaling to handle traffic spikes without manual intervention",
+      "40% cost reduction through optimization and right-sizing",
+      "Infrastructure as Code for reproducible, version-controlled deployments",
+      "24/7 monitoring with instant alerts and automated recovery"
+    ]
+  }
+];
 
 export function ServicesSection() {
   const [isMobile, setIsMobile] = useState(false);
+  const [selectedService, setSelectedService] = useState<number | null>(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -74,9 +196,18 @@ export function ServicesSection() {
                       WEB DESIGN
                     </h3>
                     
-                    <p className="text-gray-200 leading-relaxed text-xs sm:text-sm md:text-base" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
+                    <p className="text-gray-200 leading-relaxed text-xs sm:text-sm md:text-base mb-4" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
                       Complete websites and web applications. From design to deployment, we create modern, fast, and user-friendly websites that grow your business.
                     </p>
+                    
+                    <button
+                      onClick={() => setSelectedService(0)}
+                      className="mt-auto px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-semibold rounded-lg transition-all duration-300 flex items-center gap-2 w-fit text-sm shadow-lg shadow-cyan-500/50 hover:shadow-cyan-500/70 hover:scale-105 animate-pulse"
+                      style={{ fontFamily: "'Unbounded', sans-serif" }}
+                    >
+                      <Info className="w-4 h-4" />
+                      Learn More
+                    </button>
                   </div>
                   
                   <div className="absolute inset-0 z-0" suppressHydrationWarning>
@@ -93,7 +224,16 @@ export function ServicesSection() {
 
               {/* Mobile App */}
               <HoverSliderCard index={1}>
-                <div className="w-full h-full flex items-center justify-center p-1 sm:p-2 md:p-4 overflow-hidden">
+                <div className="w-full h-full flex items-center justify-center p-1 sm:p-2 md:p-4 overflow-hidden relative">
+                  <button
+                    onClick={() => setSelectedService(1)}
+                    className="absolute top-4 left-4 z-10 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-semibold rounded-lg transition-all duration-300 flex items-center gap-2 text-sm shadow-lg shadow-cyan-500/50 hover:shadow-cyan-500/70 hover:scale-105 animate-pulse"
+                    style={{ fontFamily: "'Unbounded', sans-serif" }}
+                  >
+                    <Info className="w-4 h-4" />
+                    Learn More
+                  </button>
+                  
                   <Iphone 
                     src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159868/mobile_cy4hqb.jpg"
                     className="h-full w-auto max-w-full drop-shadow-2xl"
@@ -104,7 +244,22 @@ export function ServicesSection() {
               {/* AI Automation */}
               <HoverSliderCard index={2}>
                 <PixelCard variant="blue" className="w-full h-full">
-                  <div className="absolute inset-0 flex items-center justify-center z-0" suppressHydrationWarning>
+                  <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col z-10" suppressHydrationWarning>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
+                      AI AUTOMATION
+                    </h3>
+                    
+                    <button
+                      onClick={() => setSelectedService(2)}
+                      className="mt-auto px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-semibold rounded-lg transition-all duration-300 flex items-center gap-2 w-fit text-sm shadow-lg shadow-cyan-500/50 hover:shadow-cyan-500/70 hover:scale-105 animate-pulse"
+                      style={{ fontFamily: "'Unbounded', sans-serif" }}
+                    >
+                      <Info className="w-4 h-4" />
+                      Learn More
+                    </button>
+                  </div>
+                  
+                  <div className="absolute inset-0 flex items-center justify-center z-0 opacity-40" suppressHydrationWarning>
                     <OrbitingCircles iconSize={50} radius={80} duration={20}>
                       {/* Claude AI */}
                       <div className="size-12 rounded-full overflow-hidden flex items-center justify-center shadow-xl">
@@ -150,12 +305,30 @@ aws s3 sync ./build s3://bucket`}
                         className="w-full"
                       />
                     </div>
+                    
+                    <button
+                      onClick={() => setSelectedService(3)}
+                      className="mt-4 px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-semibold rounded-lg transition-all duration-300 flex items-center gap-2 w-fit text-sm shadow-lg shadow-cyan-500/50 hover:shadow-cyan-500/70 hover:scale-105 animate-pulse"
+                      style={{ fontFamily: "'Unbounded', sans-serif" }}
+                    >
+                      <Info className="w-4 h-4" />
+                      Learn More
+                    </button>
                   </div>
                 </PixelCard>
               </HoverSliderCard>
             </HoverSliderImageWrap>
           </div>
         </HoverSlider>
+
+        {/* Service Detail Modal */}
+        {selectedService !== null && (
+          <ServiceDetailModal
+            isOpen={selectedService !== null}
+            onClose={() => setSelectedService(null)}
+            service={serviceDetails[selectedService]}
+          />
+        )}
       </div>
     </section>
   );
