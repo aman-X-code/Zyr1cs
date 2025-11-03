@@ -22,17 +22,17 @@ export function HeroSection() {
       
       {/* Hero Text Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 -mt-20" suppressHydrationWarning>
-        <div className="text-center -space-y-4 sm:-space-y-6 md:-space-y-8" suppressHydrationWarning>
+        <div className="text-center space-y-1 sm:-space-y-4 md:-space-y-6 lg:-space-y-8" suppressHydrationWarning>
           {/* Main Headline */}
-          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold text-gray-200 leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1s' }} suppressHydrationWarning>
+          <h1 className="text-[2.8rem] leading-[1.1] xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold text-gray-200 sm:leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1s' }} suppressHydrationWarning>
             Building
           </h1>
-          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold text-gray-200 leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1.3s' }} suppressHydrationWarning>
+          <h1 className="text-[2.8rem] leading-[1.1] xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold text-gray-200 sm:leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1.3s' }} suppressHydrationWarning>
             <ScribbleUnderline color="#22d3ee" delay={1.5}>
               Extraordinary
             </ScribbleUnderline>
           </h1>
-          <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold text-gray-200 leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1.6s' }} suppressHydrationWarning>
+          <h1 className="text-[2.8rem] leading-[1.1] xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold text-gray-200 sm:leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1.6s' }} suppressHydrationWarning>
             Digital Solutions
           </h1>
         </div>
@@ -43,19 +43,21 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 2 }}
-        className="absolute bottom-8 right-8 z-20 hidden md:flex flex-col items-end gap-2"
+        className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-20 flex flex-col items-end gap-2"
         suppressHydrationWarning
       >
-        <AvatarCircles
-          numPeople={26}
-          avatarUrls={[
-            "https://xsgames.co/randomusers/assets/avatars/male/1.jpg",
-            "https://xsgames.co/randomusers/assets/avatars/female/2.jpg",
-            "https://xsgames.co/randomusers/assets/avatars/male/3.jpg",
-            "https://xsgames.co/randomusers/assets/avatars/female/4.jpg",
-          ]}
-        />
-        <p className="text-white text-sm font-medium" style={{ fontFamily: "'Quicksand', sans-serif" }}>
+        <div className="scale-75 sm:scale-100 origin-bottom-right">
+          <AvatarCircles
+            numPeople={26}
+            avatarUrls={[
+              "https://xsgames.co/randomusers/assets/avatars/male/1.jpg",
+              "https://xsgames.co/randomusers/assets/avatars/female/2.jpg",
+              "https://xsgames.co/randomusers/assets/avatars/male/3.jpg",
+              "https://xsgames.co/randomusers/assets/avatars/female/4.jpg",
+            ]}
+          />
+        </div>
+        <p className="text-white text-xs sm:text-sm font-medium" style={{ fontFamily: "'Quicksand', sans-serif" }}>
           Trusted by 30+ clients
         </p>
       </motion.div>

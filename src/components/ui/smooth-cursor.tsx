@@ -89,6 +89,7 @@ export function SmoothCursor({
     restDelta: 0.001,
   },
 }: SmoothCursorProps) {
+  const [isTouchDevice, setIsTouchDevice] = useState(true) // Default to true to prevent flash on mobile
   const [isMoving, setIsMoving] = useState(false)
   const lastMousePos = useRef<Position>({ x: 0, y: 0 })
   const velocity = useRef<Position>({ x: 0, y: 0 })
@@ -110,6 +111,50 @@ export function SmoothCursor({
   })
 
   useEffect(() => {
+    // More robust check for touch devices
+    const checkTouchDevice = () => {
+      // Check 1: Touch events API
+      if ('ontouchstart' in window || (navigator as any).maxTouchPoints > 0) {
+        return true;
+      }
+      
+      // Check 2: CSS media queries
+      if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+        return true;
+      }
+      
+      // Check 3: User agent (fallback)
+      const userAgent = navigator.userAgent || (navigator as any).vendor || (window as any).opera;
+      if (/android|iPad|iPhone|iPod|windows phone/i.test(userAgent)) {
+        return true;
+      }
+      
+      // Assume it's not a touch device if none of the above match
+      return false;
+    }
+    
+    // Set initial state
+    setIsTouchDevice(checkTouchDevice())
+    
+    // Add event listeners for dynamic detection
+    const handleResize = () => {
+      setIsTouchDevice(checkTouchDevice())
+    }
+    
+    window.addEventListener('resize', handleResize)
+    
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
+    // Don't initialize cursor on touch devices
+    if (isTouchDevice) {
+      document.body.style.cursor = "auto"
+      return
+    }
+
     const updateVelocity = (currentPos: Position) => {
       const currentTime = Date.now()
       const deltaTime = currentTime - lastUpdateTime.current
@@ -178,7 +223,12 @@ export function SmoothCursor({
       document.body.style.cursor = "auto"
       if (rafId) cancelAnimationFrame(rafId)
     }
-  }, [cursorX, cursorY, rotation, scale])
+  }, [cursorX, cursorY, rotation, scale, isTouchDevice])
+
+  // Don't render cursor on touch devices
+  if (isTouchDevice) {
+    return null
+  }
 
   return (
     <motion.div

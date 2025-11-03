@@ -19,6 +19,19 @@ const Header = () => {
   const [activeSection, setActiveSection] = useState('home')
   const [isScrolled, setIsScrolled] = useState(false)
 
+  // Lock/unlock scroll when menu opens/closes
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMenuOpen])
+
   // Smooth scroll function
   const scrollToSection = (sectionId: string) => {
     const element = document.querySelector(sectionId)
@@ -139,265 +152,276 @@ const Header = () => {
 
   return (
     <div suppressHydrationWarning>
-      {/* Company Logo - Outside Header, Positioned Left */}
-      <motion.div
-        className="fixed top-4 sm:top-5 md:top-7 left-2 sm:left-4 md:left-8 z-[200]"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{
-          duration: 0.8,
-          ease: [0.25, 0.46, 0.45, 0.94],
-          type: "tween",
-        }}
-        suppressHydrationWarning
-      >
-        <button onClick={() => scrollToSection('#home')} suppressHydrationWarning>
-          <motion.div
-            initial={false}
-            animate={{
-              opacity: isScrolled ? 0 : 1,
-              scale: isScrolled ? 0.8 : 1,
-            }}
-            transition={{ duration: 0.3 }}
-            className={isScrolled ? "absolute" : "relative"}
-            suppressHydrationWarning
-          >
-            <Image
-              src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159871/white_in5rof.png"
-              alt="Zyr1cs Logo"
-              width={110}
-              height={38}
-              className="h-7 sm:h-8 md:h-9 w-auto object-contain"
+      {/* Desktop Header - Original Design */}
+      <div className="hidden md:block">
+        {/* Company Logo - Outside Header, Positioned Left */}
+        <motion.div
+          className="fixed top-5 md:top-7 left-4 md:left-8 z-[200]"
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{
+            duration: 0.8,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            type: "tween",
+          }}
+          suppressHydrationWarning
+        >
+          <button onClick={() => scrollToSection('#home')} suppressHydrationWarning>
+            <motion.div
+              initial={false}
+              animate={{
+                opacity: isScrolled ? 0 : 1,
+                scale: isScrolled ? 0.8 : 1,
+              }}
+              transition={{ duration: 0.3 }}
+              className={isScrolled ? "absolute" : "relative"}
               suppressHydrationWarning
-            />
-          </motion.div>
-          <motion.div
-            initial={false}
-            animate={{
-              opacity: isScrolled ? 1 : 0,
-              scale: isScrolled ? 1 : 0.8,
-            }}
-            transition={{ duration: 0.3 }}
-            className={!isScrolled ? "absolute" : "relative"}
-            suppressHydrationWarning
-          >
-            <Image
-              src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159870/whitehalf_xrwoeb.png"
-              alt="Z1 Logo"
-              width={40}
-              height={40}
-              className="h-7 sm:h-8 md:h-9 w-auto object-contain"
-              suppressHydrationWarning
-            />
-          </motion.div>
-        </button>
-      </motion.div>
-
-      {/* Central Navigation Only */}
-      <motion.div
-        className="fixed top-3 sm:top-4 md:top-6 left-1/2 transform -translate-x-1/2 z-[100]"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{
-          duration: 0.8,
-          ease: [0.25, 0.46, 0.45, 0.94],
-          type: "tween",
-        }}
-        suppressHydrationWarning
-      >
-        {/* Navigation Links Container - Hidden on mobile */}
-        <nav className="hidden md:flex items-center space-x-4 lg:space-x-6 px-4 lg:px-6 py-2 lg:py-3 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-lg" suppressHydrationWarning>
-          {navItems.map((item) => {
-            const isActive = activeSection === item.href.replace('#', '')
-            return (
-              <button
-                key={item.name}
-                onClick={() => scrollToSection(item.href)}
-                className={`relative font-medium transition-all duration-400 group text-sm lg:text-base ${
-                  isActive ? "text-cyan-300" : "text-white hover:text-cyan-300"
-                }`}
-                style={{
-                  fontFamily: "'Unbounded', sans-serif",
-                  transitionTimingFunction: 'cubic-bezier(0.25, 0.8, 0.25, 1)',
-                  transitionDuration: '400ms',
-                  transitionProperty: 'color',
-                  cursor: 'pointer'
-                }}
+            >
+              <Image
+                src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159871/white_in5rof.png"
+                alt="Zyr1cs Logo"
+                width={110}
+                height={38}
+                className="h-8 md:h-9 w-auto object-contain"
                 suppressHydrationWarning
-              >
-                {item.name}
-              </button>
-            )
-          })}
-        </nav>
+              />
+            </motion.div>
+            <motion.div
+              initial={false}
+              animate={{
+                opacity: isScrolled ? 1 : 0,
+                scale: isScrolled ? 1 : 0.8,
+              }}
+              transition={{ duration: 0.3 }}
+              className={!isScrolled ? "absolute" : "relative"}
+              suppressHydrationWarning
+            >
+              <Image
+                src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159870/whitehalf_xrwoeb.png"
+                alt="Z1 Logo"
+                width={40}
+                height={40}
+                className="h-8 md:h-9 w-auto object-contain"
+                suppressHydrationWarning
+              />
+            </motion.div>
+          </button>
+        </motion.div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden text-white p-3 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-lg hover:bg-white/10 transition-colors duration-200"
-          aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-          aria-expanded={isMenuOpen}
-          aria-controls="mobile-navigation"
+        {/* Central Navigation */}
+        <motion.div
+          className="fixed top-4 md:top-6 left-1/2 transform -translate-x-1/2 z-[100]"
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{
+            duration: 0.8,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            type: "tween",
+          }}
           suppressHydrationWarning
         >
-          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      </motion.div>
+          <nav className="flex items-center space-x-4 lg:space-x-6 px-4 lg:px-6 py-2 lg:py-3 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-lg" suppressHydrationWarning>
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href.replace('#', '')
+              return (
+                <button
+                  key={item.name}
+                  onClick={() => scrollToSection(item.href)}
+                  className={`relative font-medium transition-all duration-400 group text-sm lg:text-base ${
+                    isActive ? "text-cyan-300" : "text-white hover:text-cyan-300"
+                  }`}
+                  style={{
+                    fontFamily: "'Unbounded', sans-serif",
+                    transitionTimingFunction: 'cubic-bezier(0.25, 0.8, 0.25, 1)',
+                    transitionDuration: '400ms',
+                    transitionProperty: 'color',
+                    cursor: 'pointer'
+                  }}
+                  suppressHydrationWarning
+                >
+                  {item.name}
+                </button>
+              )
+            })}
+          </nav>
+        </motion.div>
 
-      {/* CTA Button - Right Corner - Hidden on mobile */}
+        {/* CTA Button - Right Corner */}
+        <motion.div
+          className="fixed top-4 md:top-6 right-4 md:right-8 z-[200]"
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{
+            duration: 0.8,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            type: "tween",
+          }}
+          suppressHydrationWarning
+        >
+          <button
+            onClick={() => scrollToSection('#contact')}
+            className="px-4 lg:px-6 py-2 lg:py-3 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-lg text-white font-medium transition-all duration-200 text-sm lg:text-base hover:bg-white/10"
+            style={{ fontFamily: "'Unbounded', sans-serif" }}
+            suppressHydrationWarning
+          >
+            Get Started
+          </button>
+        </motion.div>
+      </div>
+
+      {/* Backdrop Overlay */}
       <motion.div
-        className="hidden md:block fixed top-3 sm:top-4 md:top-6 right-2 sm:right-4 md:right-8 z-[200]"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{
-          duration: 0.8,
-          ease: [0.25, 0.46, 0.45, 0.94],
-          type: "tween",
-        }}
-        suppressHydrationWarning
-      >
-        <button
-          onClick={() => scrollToSection('#contact')}
-          className="px-4 lg:px-6 py-2 lg:py-3 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-lg text-white font-medium transition-all duration-200 text-sm lg:text-base hover:bg-white/10"
-          style={{ fontFamily: "'Unbounded', sans-serif" }}
-          suppressHydrationWarning
-        >
-          Get Started
-        </button>
-      </motion.div>
-
-      {/* Mobile Navigation */}
-      <motion.nav
-        id="mobile-navigation"
         initial={false}
         animate={{
-          height: isMenuOpen ? "auto" : 0,
           opacity: isMenuOpen ? 1 : 0,
+          pointerEvents: isMenuOpen ? "auto" : "none",
         }}
         transition={{
           duration: 0.3,
+        }}
+        className="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[130]"
+        onClick={() => setIsMenuOpen(false)}
+        suppressHydrationWarning
+      />
+
+      {/* Mobile Floating Navbar */}
+      <motion.div
+        className="md:hidden fixed top-4 left-4 right-4 z-[200]"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{
+          duration: 0.8,
           ease: [0.25, 0.46, 0.45, 0.94],
+          type: "tween",
         }}
-        className="md:hidden overflow-hidden backdrop-blur-2xl border border-white/10 rounded-2xl fixed top-20 left-4 right-4 shadow-lg"
-        style={{
-          background: 'rgba(255, 255, 255, 0.05)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-        }}
-        aria-label="Mobile navigation menu"
         suppressHydrationWarning
       >
-        <motion.div
-          initial={false}
-          animate={{
-            y: isMenuOpen ? 0 : -20,
-          }}
-          transition={{
-            duration: 0.3,
-            delay: isMenuOpen ? 0.1 : 0,
-            ease: [0.25, 0.46, 0.45, 0.94],
-          }}
-          className="px-3 pb-4"
-          suppressHydrationWarning
-        >
-          <ul className="flex flex-col space-y-0" suppressHydrationWarning>
+        <div className="flex items-center justify-between px-5 py-3 rounded-full bg-black/40 backdrop-blur-2xl border border-white/10 shadow-2xl">
+          {/* Logo */}
+          <button onClick={() => scrollToSection('#home')} className="flex-shrink-0" suppressHydrationWarning>
+            <Image
+              src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159871/white_in5rof.png"
+              alt="Zyr1cs Logo"
+              width={90}
+              height={32}
+              className="h-6 w-auto object-contain"
+              suppressHydrationWarning
+            />
+          </button>
+
+          {/* Hamburger Menu */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-white p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-200"
+            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            suppressHydrationWarning
+          >
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </motion.div>
+
+      {/* Half-Screen Mobile Menu Expanding Downward from Navbar */}
+      <motion.div
+        initial={false}
+        animate={{
+          height: isMenuOpen ? '60vh' : '0vh',
+          opacity: isMenuOpen ? 1 : 0,
+          pointerEvents: isMenuOpen ? "auto" : "none",
+        }}
+        transition={{
+          duration: 0.5,
+          ease: [0.76, 0, 0.24, 1],
+        }}
+        className="md:hidden fixed left-4 right-4 z-[140] overflow-hidden rounded-3xl"
+        style={{
+          top: '4.5rem',
+          background: '#000000',
+          transformOrigin: 'top',
+        }}
+        suppressHydrationWarning
+      >
+
+        <div className="flex flex-col justify-center items-center h-full px-6 py-8 relative z-10">
+          {/* Menu Items - Centered with active having background */}
+          <div className="w-full max-w-lg space-y-8">
             {navItems.map((item, index) => {
               const isActive = activeSection === item.href.replace('#', '')
               return (
-                <motion.li
+                <motion.div
                   key={item.name}
                   initial={false}
                   animate={{
                     opacity: isMenuOpen ? 1 : 0,
-                    x: isMenuOpen ? 0 : -20,
+                    y: isMenuOpen ? 0 : 50,
                   }}
                   transition={{
-                    duration: 0.2,
-                    delay: isMenuOpen ? 0.15 + index * 0.05 : 0,
-                    ease: [0.25, 0.46, 0.45, 0.94],
+                    duration: 0.6,
+                    delay: isMenuOpen ? 0.2 + index * 0.08 : 0,
+                    ease: [0.76, 0, 0.24, 1],
                   }}
-                  className="relative"
                   suppressHydrationWarning
                 >
-                  <button
+                  <motion.button
                     onClick={() => scrollToSection(item.href)}
-                    className={`relative py-3 md:py-4 text-base md:text-lg font-sans font-semibold transition-all duration-400 text-center group flex items-center justify-center ${
-                      isActive ? "text-yellow-400" : "text-white hover:text-yellow-400"
-                    }`}
+                    className="w-full text-center py-3 px-6 relative group rounded-2xl"
+                    animate={{
+                      scale: isActive ? 1 : 0.95,
+                    }}
+                    whileTap={{ 
+                      scale: 0.95,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 30,
+                    }}
                     style={{
-                      transitionTimingFunction: 'cubic-bezier(0.25, 0.8, 0.25, 1)',
-                      transitionDuration: '400ms',
-                      transitionProperty: 'color'
+                      background: isActive ? 'rgba(55, 65, 81, 0.5)' : 'transparent',
                     }}
                     suppressHydrationWarning
                   >
-                    <span 
-                      className="relative"
-                      suppressHydrationWarning
+                    {/* Text */}
+                    <motion.span 
+                      className={`relative z-10 inline-block font-black ${
+                        isActive ? "text-cyan-300" : "text-white"
+                      }`}
+                      style={{
+                        fontFamily: "'Druk Trial', sans-serif",
+                        fontSize: isActive ? '2.5rem' : '1.5rem',
+                        letterSpacing: '0.08em',
+                        lineHeight: '1.2',
+                        transition: 'all 0.4s cubic-bezier(0.76, 0, 0.24, 1)',
+                      }}
+                      whileHover={{ 
+                        scale: 1.05,
+                        transition: { duration: 0.2 }
+                      }}
                     >
                       {item.name}
-                      {!isActive && (
-                        <span 
-                          className="absolute bottom-[-2px] left-0 w-0 h-0.5 transition-all duration-400 group-hover:w-full"
-                          style={{
-                            backgroundColor: '#fbbf24',
-                            transitionTimingFunction: 'cubic-bezier(0.25, 0.8, 0.25, 1)',
-                            transitionDuration: '400ms',
-                            transitionProperty: 'width'
-                          }}
-                          suppressHydrationWarning
-                        />
-                      )}
-                    </span>
-                  </button>
-                  {/* Faded line separator */}
-                  {index < navItems.length - 1 && (
-                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" suppressHydrationWarning></div>
-                  )}
-                </motion.li>
+                    </motion.span>
+
+                    {/* Ripple effect on tap */}
+                    <motion.div
+                      className="absolute inset-0 rounded-2xl border-2 border-cyan-400"
+                      initial={{ scale: 1, opacity: 0 }}
+                      whileTap={{ 
+                        scale: 1.2, 
+                        opacity: [0.5, 0],
+                        transition: { duration: 0.5 }
+                      }}
+                    />
+                  </motion.button>
+                </motion.div>
               )
             })}
-            {/* Separator before CTA button */}
-            <motion.div
-              initial={false}
-              animate={{
-                opacity: isMenuOpen ? 1 : 0,
-              }}
-              transition={{
-                duration: 0.2,
-                delay: isMenuOpen ? 0.15 + navItems.length * 0.05 : 0,
-                ease: [0.25, 0.46, 0.45, 0.94],
-              }}
-              className="w-3/4 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto my-4"
-              suppressHydrationWarning
-            ></motion.div>
-            <motion.li
-              initial={false}
-              animate={{
-                opacity: isMenuOpen ? 1 : 0,
-                x: isMenuOpen ? 0 : -20,
-              }}
-              transition={{
-                duration: 0.2,
-                delay: isMenuOpen ? 0.15 + navItems.length * 0.05 + 0.05 : 0,
-                ease: [0.25, 0.46, 0.45, 0.94],
-              }}
-              className="flex justify-center"
-              suppressHydrationWarning
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full bg-primary text-white px-6 py-2 rounded-lg font-semibold transition-all duration-200 mt-2"
-                onClick={() => scrollToSection('#contact')}
-                suppressHydrationWarning
-              >
-                Get Started
-              </motion.button>
-            </motion.li>
-          </ul>
-        </motion.div>
-      </motion.nav>
+          </div>
+
+
+        </div>
+      </motion.div>
     </div>
   )
 }

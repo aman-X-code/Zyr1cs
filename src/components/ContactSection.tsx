@@ -124,7 +124,7 @@ export function ContactSection() {
         </div>
 
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* Left Side - Form */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -132,9 +132,9 @@ export function ContactSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 {/* Name & Email Row */}
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                   <div className="relative group">
                     <input
                       type="text"
@@ -144,7 +144,7 @@ export function ContactSection() {
                       onFocus={() => setFocusedField("name")}
                       onBlur={() => setFocusedField(null)}
                       placeholder="Your Name *"
-                      className="w-full bg-white/5 border-2 border-gray-800 focus:border-white rounded-xl px-6 py-4 text-white placeholder-gray-500 outline-none transition-all duration-300"
+                      className="w-full bg-white/5 border-2 border-gray-800 focus:border-white rounded-xl px-4 sm:px-6 py-3 sm:py-4 text-white placeholder-gray-500 outline-none transition-all duration-300"
                       style={{ fontFamily: "'Quicksand', sans-serif" }}
                       required
                     />
@@ -166,7 +166,7 @@ export function ContactSection() {
                       placeholder="Email Address *"
                       className={`w-full bg-white/5 border-2 ${
                         errors.email ? "border-red-500" : "border-gray-800"
-                      } focus:border-white rounded-xl px-6 py-4 text-white placeholder-gray-500 outline-none transition-all duration-300`}
+                      } focus:border-white rounded-xl px-4 sm:px-6 py-3 sm:py-4 text-white placeholder-gray-500 outline-none transition-all duration-300`}
                       style={{ fontFamily: "'Quicksand', sans-serif" }}
                       required
                     />
@@ -187,7 +187,7 @@ export function ContactSection() {
                 </div>
 
                 {/* Phone & Company Row */}
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                   <div className="relative group">
                     <input
                       type="tel"
@@ -199,7 +199,7 @@ export function ContactSection() {
                       placeholder="Phone Number (10 digits)"
                       className={`w-full bg-white/5 border-2 ${
                         errors.phone ? "border-red-500" : "border-gray-800"
-                      } focus:border-white rounded-xl px-6 py-4 text-white placeholder-gray-500 outline-none transition-all duration-300`}
+                      } focus:border-white rounded-xl px-4 sm:px-6 py-3 sm:py-4 text-white placeholder-gray-500 outline-none transition-all duration-300`}
                       style={{ fontFamily: "'Quicksand', sans-serif" }}
                       maxLength={10}
                     />
@@ -227,7 +227,7 @@ export function ContactSection() {
                       onFocus={() => setFocusedField("company")}
                       onBlur={() => setFocusedField(null)}
                       placeholder="Company Name"
-                      className="w-full bg-white/5 border-2 border-gray-800 focus:border-white rounded-xl px-6 py-4 text-white placeholder-gray-500 outline-none transition-all duration-300"
+                      className="w-full bg-white/5 border-2 border-gray-800 focus:border-white rounded-xl px-4 sm:px-6 py-3 sm:py-4 text-white placeholder-gray-500 outline-none transition-all duration-300"
                       style={{ fontFamily: "'Quicksand', sans-serif" }}
                     />
                     <div
@@ -246,7 +246,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     onFocus={() => setFocusedField("budget")}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full bg-white/5 border-2 border-gray-800 focus:border-white rounded-xl px-6 py-4 text-white outline-none transition-all duration-300 appearance-none cursor-pointer"
+                    className="w-full bg-white/5 border-2 border-gray-800 focus:border-white rounded-xl px-4 sm:px-6 py-3 sm:py-4 text-white outline-none transition-all duration-300 appearance-none cursor-pointer"
                     style={{ fontFamily: "'Quicksand', sans-serif" }}
                   >
                     <option value="" className="bg-black">
@@ -297,8 +297,8 @@ export function ContactSection() {
                     onFocus={() => setFocusedField("message")}
                     onBlur={() => setFocusedField(null)}
                     placeholder="Tell us about your project *"
-                    rows={6}
-                    className="w-full bg-white/5 border-2 border-gray-800 focus:border-white rounded-xl px-6 py-4 text-white placeholder-gray-500 outline-none transition-all duration-300 resize-none"
+                    rows={5}
+                    className="w-full bg-white/5 border-2 border-gray-800 focus:border-white rounded-xl px-4 sm:px-6 py-3 sm:py-4 text-white placeholder-gray-500 outline-none transition-all duration-300 resize-none"
                     style={{ fontFamily: "'Quicksand', sans-serif" }}
                     required
                   />
@@ -312,7 +312,7 @@ export function ContactSection() {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-white text-black font-black text-xl py-5 rounded-xl hover:bg-gray-200 transition-colors duration-300 tracking-wider"
+                  className="w-full bg-white text-black font-black text-lg sm:text-xl py-4 sm:py-5 rounded-xl hover:bg-gray-200 transition-colors duration-300 tracking-wider"
                   style={{ fontFamily: "'Druk Trial', sans-serif" }}
                 >
                   SEND MESSAGE
@@ -328,15 +328,15 @@ export function ContactSection() {
               transition={{ duration: 0.6 }}
               className="space-y-6"
             >
-              <div className="bg-gradient-to-br from-white to-gray-200 rounded-2xl p-8 text-black">
+              <div className="bg-gradient-to-br from-white to-gray-200 rounded-2xl p-6 sm:p-8 text-black">
                 <h3
-                  className="text-3xl md:text-4xl font-black mb-6"
+                  className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 sm:mb-6"
                   style={{ fontFamily: "'Druk Trial', sans-serif" }}
                 >
                   LET&apos;S TALK
                 </h3>
                 <p
-                  className="text-lg mb-8 leading-relaxed"
+                  className="text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed"
                   style={{ fontFamily: "'Quicksand', sans-serif" }}
                 >
                   Have a project in mind? We&apos;d love to hear about it. Fill
@@ -344,11 +344,11 @@ export function ContactSection() {
                   possible.
                 </p>
 
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black rounded-xl flex items-center justify-center flex-shrink-0">
                       <svg
-                        className="w-6 h-6 text-white"
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-white"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -363,13 +363,13 @@ export function ContactSection() {
                     </div>
                     <div>
                       <p
-                        className="font-bold mb-1 tracking-wider"
+                        className="font-bold mb-1 tracking-wider text-sm sm:text-base"
                         style={{ fontFamily: "'Druk Trial', sans-serif" }}
                       >
                         EMAIL
                       </p>
                       <p
-                        className="text-gray-700"
+                        className="text-gray-700 text-xs sm:text-sm break-all"
                         style={{ fontFamily: "'Quicksand', sans-serif" }}
                       >
                         aamankhanna1112@gmail.com
@@ -377,10 +377,10 @@ export function ContactSection() {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black rounded-xl flex items-center justify-center flex-shrink-0">
                       <svg
-                        className="w-6 h-6 text-white"
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-white"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -395,13 +395,13 @@ export function ContactSection() {
                     </div>
                     <div>
                       <p
-                        className="font-bold mb-1 tracking-wider"
+                        className="font-bold mb-1 tracking-wider text-sm sm:text-base"
                         style={{ fontFamily: "'Druk Trial', sans-serif" }}
                       >
                         PHONE
                       </p>
                       <p
-                        className="text-gray-700"
+                        className="text-gray-700 text-xs sm:text-sm"
                         style={{ fontFamily: "'Quicksand', sans-serif" }}
                       >
                         +91 9039242458
@@ -409,10 +409,10 @@ export function ContactSection() {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black rounded-xl flex items-center justify-center flex-shrink-0">
                       <svg
-                        className="w-6 h-6 text-white"
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-white"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -433,13 +433,13 @@ export function ContactSection() {
                     </div>
                     <div>
                       <p
-                        className="font-bold mb-1 tracking-wider"
+                        className="font-bold mb-1 tracking-wider text-sm sm:text-base"
                         style={{ fontFamily: "'Druk Trial', sans-serif" }}
                       >
                         OFFICE
                       </p>
                       <p
-                        className="text-gray-700"
+                        className="text-gray-700 text-xs sm:text-sm"
                         style={{ fontFamily: "'Quicksand', sans-serif" }}
                       >
                         Delhi, India
@@ -449,22 +449,22 @@ export function ContactSection() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
-                <div className="bg-white/5 backdrop-blur-sm border-2 border-gray-800 rounded-xl p-6 text-center">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                <div className="bg-white/5 backdrop-blur-sm border-2 border-gray-800 rounded-xl p-4 sm:p-6 text-center">
                   <p
-                    className="text-4xl font-black text-white mb-2"
+                    className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-2"
                     style={{ fontFamily: "'Druk Trial', sans-serif" }}
                   >
                     24h
                   </p>
                   <p
-                    className="text-gray-400 text-sm"
+                    className="text-gray-400 text-xs sm:text-sm"
                     style={{ fontFamily: "'Quicksand', sans-serif" }}
                   >
                     Response Time
                   </p>
                 </div>
-                <div className="bg-white/5 backdrop-blur-sm border-2 border-gray-800 rounded-xl p-6 text-center">
+                <div className="bg-white/5 backdrop-blur-sm border-2 border-gray-800 rounded-xl p-4 sm:p-6 text-center">
                   <p
                     className="text-4xl font-black text-white mb-2"
                     style={{ fontFamily: "'Druk Trial', sans-serif" }}
@@ -472,7 +472,7 @@ export function ContactSection() {
                     100+
                   </p>
                   <p
-                    className="text-gray-400 text-sm"
+                    className="text-gray-400 text-xs sm:text-sm"
                     style={{ fontFamily: "'Quicksand', sans-serif" }}
                   >
                     Projects Done
@@ -484,8 +484,7 @@ export function ContactSection() {
         </div>
       </div>
 
-      {/* Faded divider line matching footer style */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+
     </section>
   );
 }

@@ -41,7 +41,7 @@ const Footer = () => {
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10" suppressHydrationWarning>
         <div className="py-8 sm:py-10 lg:py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
             
             {/* Company Info */}
             <div className="lg:col-span-2" suppressHydrationWarning>
@@ -61,7 +61,7 @@ const Footer = () => {
                     className="h-8 sm:h-9 md:h-10 w-auto object-contain mb-3"
                     suppressHydrationWarning
                   />
-                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-md" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
+                  <p className="text-gray-300 text-xs sm:text-sm leading-relaxed max-w-md" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
                     We create exceptional digital experiences that drive results. From web development to digital strategy, 
                     we help businesses thrive in the digital landscape.
                   </p>
@@ -69,21 +69,21 @@ const Footer = () => {
                 
                 {/* Contact Info */}
                 <div className="space-y-2" suppressHydrationWarning>
-                  <div className="flex items-center space-x-3 text-gray-300" suppressHydrationWarning>
-                    <Mail size={16} className="text-cyan-400 flex-shrink-0" />
-                    <span className="text-sm" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
+                  <div className="flex items-center space-x-2 sm:space-x-3 text-gray-300" suppressHydrationWarning>
+                    <Mail size={14} className="text-cyan-400 flex-shrink-0 sm:w-4 sm:h-4" />
+                    <span className="text-xs sm:text-sm break-all" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
                       aamankhanna1112@gmail.com
                     </span>
                   </div>
-                  <div className="flex items-center space-x-3 text-gray-300" suppressHydrationWarning>
-                    <Phone size={16} className="text-cyan-400 flex-shrink-0" />
-                    <span className="text-sm" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
+                  <div className="flex items-center space-x-2 sm:space-x-3 text-gray-300" suppressHydrationWarning>
+                    <Phone size={14} className="text-cyan-400 flex-shrink-0 sm:w-4 sm:h-4" />
+                    <span className="text-xs sm:text-sm" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
                       +91 9039242458
                     </span>
                   </div>
-                  <div className="flex items-center space-x-3 text-gray-300" suppressHydrationWarning>
-                    <MapPin size={16} className="text-cyan-400 flex-shrink-0" />
-                    <span className="text-sm" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
+                  <div className="flex items-center space-x-2 sm:space-x-3 text-gray-300" suppressHydrationWarning>
+                    <MapPin size={14} className="text-cyan-400 flex-shrink-0 sm:w-4 sm:h-4" />
+                    <span className="text-xs sm:text-sm" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
                       Delhi, India
                     </span>
                   </div>
@@ -100,15 +100,15 @@ const Footer = () => {
                 viewport={{ once: true }}
                 suppressHydrationWarning
               >
-                <h3 className="text-white font-semibold text-lg mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
+                <h3 className="text-white font-semibold text-base sm:text-lg mb-3 sm:mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
                   Quick Links
                 </h3>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2" suppressHydrationWarning>
+                <div className="grid grid-cols-2 gap-x-3 sm:gap-x-4 gap-y-2" suppressHydrationWarning>
                   {quickLinks.map((link) => (
                     <button
                       key={link.name}
                       onClick={() => scrollToSection(link.href)}
-                      className="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-sm text-left"
+                      className="text-gray-300 hover:text-cyan-400 transition-colors duration-300 text-xs sm:text-sm text-left"
                       style={{ fontFamily: "'Quicksand', sans-serif" }}
                       suppressHydrationWarning
                     >
@@ -128,10 +128,10 @@ const Footer = () => {
                 viewport={{ once: true }}
                 suppressHydrationWarning
               >
-                <h3 className="text-white font-semibold text-lg mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
+                <h3 className="text-white font-semibold text-base sm:text-lg mb-3 sm:mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
                   Follow Us
                 </h3>
-                <div className="flex space-x-3" suppressHydrationWarning>
+                <div className="flex space-x-2 sm:space-x-3" suppressHydrationWarning>
                   {socialLinks.map((social) => {
                     const IconComponent = social.icon;
                     return (
@@ -140,11 +140,11 @@ const Footer = () => {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`text-gray-400 ${social.color} transition-colors duration-300 p-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50`}
+                        className={`text-gray-400 ${social.color} transition-colors duration-300 p-1.5 sm:p-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50`}
                         aria-label={social.name}
                         suppressHydrationWarning
                       >
-                        <IconComponent size={18} />
+                        <IconComponent size={16} className="sm:w-[18px] sm:h-[18px]" />
                       </a>
                     );
                   })}
@@ -166,7 +166,7 @@ const Footer = () => {
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent" suppressHydrationWarning></div>
             
             <div className="flex justify-center items-center" suppressHydrationWarning>
-              <div className="text-gray-400 text-sm" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
+              <div className="text-gray-400 text-xs sm:text-sm" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
                 © {currentYear} Zyr1cs. All rights reserved.
               </div>
             </div>

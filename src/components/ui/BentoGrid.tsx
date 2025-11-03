@@ -38,7 +38,7 @@ export const BentoGrid = ({
           <div
             key={index}
             className={cn(
-              "relative overflow-hidden rounded-lg p-6",
+              "relative overflow-hidden rounded-lg p-4 sm:p-6",
               "bg-white/5 backdrop-blur-lg",
               "border text-white group",
               card.className
@@ -64,17 +64,17 @@ export const BentoGrid = ({
             {/* Content on left side */}
             <div className="relative z-10 flex flex-col h-full justify-between">
               <div className="flex items-start">
-                {card.customIcon ? card.customIcon : <Icon className="h-8 w-8 text-cyan-400" />}
+                {card.customIcon ? card.customIcon : <Icon className="h-6 w-6 sm:h-8 sm:w-8 text-cyan-400" />}
               </div>
               <div>
                 <h3 
-                  className="text-2xl font-bold mb-2 text-white tracking-widest"
+                  className="text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2 text-white tracking-widest"
                   style={{ fontFamily: "'Druk Trial', sans-serif" }}
                 >
                   {card.title}
                 </h3>
                 <p 
-                  className="text-sm text-gray-400"
+                  className="text-xs sm:text-sm text-gray-400"
                   style={{ fontFamily: "'Quicksand', sans-serif" }}
                 >
                   {card.description}

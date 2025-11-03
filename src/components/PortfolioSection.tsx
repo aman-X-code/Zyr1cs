@@ -122,7 +122,7 @@ export function PortfolioSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" 
+              className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" 
             />
           )}
           
@@ -132,7 +132,7 @@ export function PortfolioSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" 
+              className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" 
             />
           )}
           
@@ -143,7 +143,7 @@ export function PortfolioSection() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={scrollLeft}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-[#0A0A0A] rounded-full flex items-center justify-center hover:bg-[#1a1a1a] transition-colors"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 bg-[#0A0A0A] rounded-full flex items-center justify-center hover:bg-[#1a1a1a] transition-colors"
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M12 5L7 10L12 15" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -158,7 +158,7 @@ export function PortfolioSection() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={scrollRight}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-[#0A0A0A] rounded-full flex items-center justify-center hover:bg-[#1a1a1a] transition-colors"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 bg-[#0A0A0A] rounded-full flex items-center justify-center hover:bg-[#1a1a1a] transition-colors"
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M8 5L13 10L8 15" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -169,8 +169,8 @@ export function PortfolioSection() {
           {/* Scrollable Container */}
           <div
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            className="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4 -mx-4 px-4 sm:mx-0 sm:px-0"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
           >
             {projects.map((project, index) => (
               <motion.div
@@ -179,24 +179,24 @@ export function PortfolioSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group cursor-pointer flex-shrink-0 w-[350px]"
+                className="group cursor-pointer flex-shrink-0 w-[280px] sm:w-[320px] md:w-[350px]"
               >
                 <div className="bg-[#121212] rounded-lg overflow-hidden hover:bg-[#1a1a1a] transition-colors duration-300 border" style={{ borderColor: '#27272A' }}>
                   {/* Header */}
-                  <div className="p-6 pb-4">
-                    <div className="mb-4">
-                      <span className="text-white font-semibold" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  <div className="p-4 sm:p-6 pb-3 sm:pb-4">
+                    <div className="mb-3 sm:mb-4">
+                      <span className="text-white font-semibold text-sm sm:text-base" style={{ fontFamily: "'Inter', sans-serif" }}>
                         {project.company}
                       </span>
                     </div>
                     
-                    <h4 className="text-white text-base font-normal leading-snug" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    <h4 className="text-white text-sm sm:text-base font-normal leading-snug" style={{ fontFamily: "'Inter', sans-serif" }}>
                       {project.title}
                     </h4>
                   </div>
 
                   {/* Mockup */}
-                  <div className="relative h-72 flex items-end justify-center px-6 pb-6">
+                  <div className="relative h-56 sm:h-64 md:h-72 flex items-end justify-center px-4 sm:px-6 pb-4 sm:pb-6">
                     <img
                       src={project.mockup}
                       alt={project.company}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import PixelCard from "./PixelCard";
 import Ballpit from "./Ballpit";
 import BlurText from "./BlurText";
@@ -11,8 +12,18 @@ import { Icons } from "./Icons";
 import { Particles } from "./ui/Particles";
 
 export function ServicesSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   return (
-    <section id="services" className="py-12 bg-black relative overflow-hidden" suppressHydrationWarning>
+    <section id="services" className="py-12 pb-6 bg-black relative overflow-hidden" suppressHydrationWarning>
       <Particles
         className="absolute inset-0"
         quantity={80}
@@ -41,45 +52,51 @@ export function ServicesSection() {
         </div>
 
         {/* Services Hover Slider */}
-        <HoverSlider className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start" suppressHydrationWarning>
+        <HoverSlider className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start mb-6 lg:mb-0" suppressHydrationWarning>
           {/* Left Side - Service Names */}
-          <div className="flex-1 space-y-4 pointer-events-none" suppressHydrationWarning>
-            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white w-fit" style={{ fontFamily: "'Druk Trial', sans-serif" }} suppressHydrationWarning>
-              <TextStaggerHover text="WEB DESIGN" index={0} className="block mb-2 pointer-events-auto w-fit" />
-              <TextStaggerHover text="MOBILE APPLICATION" index={1} className="block mb-2 pointer-events-auto w-fit" />
-              <TextStaggerHover text="AI AUTOMATION" index={2} className="block mb-2 pointer-events-auto w-fit" />
-              <TextStaggerHover text="CLOUD SERVICES" index={3} className="block mb-2 pointer-events-auto w-fit" />
+          <div className="flex-1 space-y-2 sm:space-y-4 pointer-events-none w-full" suppressHydrationWarning>
+            <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white w-fit" style={{ fontFamily: "'Druk Trial', sans-serif" }} suppressHydrationWarning>
+              <TextStaggerHover text="WEB DESIGN" index={0} className="block mb-1 sm:mb-2 pointer-events-auto w-fit" />
+              <TextStaggerHover text="MOBILE APPLICATION" index={1} className="block mb-1 sm:mb-2 pointer-events-auto w-fit" />
+              <TextStaggerHover text="AI AUTOMATION" index={2} className="block mb-1 sm:mb-2 pointer-events-auto w-fit" />
+              <TextStaggerHover text="CLOUD SERVICES" index={3} className="block mb-1 sm:mb-2 pointer-events-auto w-fit" />
             </div>
           </div>
 
           {/* Right Side - Service Cards */}
           <div className="flex-1 w-full lg:w-auto" suppressHydrationWarning>
-            <HoverSliderImageWrap className="w-full max-w-[400px] h-[400px] lg:h-[450px] overflow-visible" suppressHydrationWarning>
+            <HoverSliderImageWrap className="w-full max-w-full sm:max-w-[400px] h-96 sm:h-48 md:h-64 lg:h-[450px] overflow-visible mx-auto" suppressHydrationWarning>
               {/* Web Development */}
               <HoverSliderCard index={0}>
                 <PixelCard variant="blue" className="w-full h-full">
-                  <div className="absolute inset-0 p-4 md:p-6 flex flex-col z-10" suppressHydrationWarning>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
+                  <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col z-10" suppressHydrationWarning>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
                       WEB DESIGN
                     </h3>
                     
-                    <p className="text-gray-200 leading-relaxed text-sm md:text-base" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
+                    <p className="text-gray-200 leading-relaxed text-xs sm:text-sm md:text-base" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
                       Complete websites and web applications. From design to deployment, we create modern, fast, and user-friendly websites that grow your business.
                     </p>
                   </div>
                   
                   <div className="absolute inset-0 z-0" suppressHydrationWarning>
-                    <Ballpit className="w-full h-full" />
+                    <Ballpit 
+                      className="w-full h-full"
+                      count={isMobile ? 8 : 15}
+                      minSize={isMobile ? 0.25 : 0.8}
+                      maxSize={isMobile ? 0.5 : 1.5}
+                      size0={isMobile ? 0.5 : 1.5}
+                    />
                   </div>
                 </PixelCard>
               </HoverSliderCard>
 
               {/* Mobile App */}
               <HoverSliderCard index={1}>
-                <div className="w-full h-full flex items-start justify-center pt-1 px-8 overflow-hidden">
+                <div className="w-full h-full flex items-center justify-center p-1 sm:p-2 md:p-4 overflow-hidden">
                   <Iphone 
                     src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159868/mobile_cy4hqb.jpg"
-                    className="h-[110%] w-auto drop-shadow-2xl scale-110"
+                    className="h-full w-auto max-w-full drop-shadow-2xl"
                   />
                 </div>
               </HoverSliderCard>
@@ -87,7 +104,7 @@ export function ServicesSection() {
               {/* AI Automation */}
               <HoverSliderCard index={2}>
                 <PixelCard variant="blue" className="w-full h-full">
-                  <div className="absolute inset-0 flex items-center justify-center z-0">
+                  <div className="absolute inset-0 flex items-center justify-center z-0" suppressHydrationWarning>
                     <OrbitingCircles iconSize={50} radius={80} duration={20}>
                       {/* Claude AI */}
                       <div className="size-12 rounded-full overflow-hidden flex items-center justify-center shadow-xl">
@@ -119,8 +136,8 @@ export function ServicesSection() {
               {/* Cloud Services */}
               <HoverSliderCard index={3}>
                 <PixelCard variant="blue" className="w-full h-full">
-                  <div className="absolute inset-0 p-4 md:p-6 flex flex-col z-10" suppressHydrationWarning>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
+                  <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col z-10" suppressHydrationWarning>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
                       CLOUD SERVICES
                     </h3>
                     

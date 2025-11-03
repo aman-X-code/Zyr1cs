@@ -115,7 +115,7 @@ export function WhyChooseUsSection() {
   ];
 
   return (
-    <section id="why-choose-us" className="py-20 bg-black relative overflow-hidden">
+    <section id="why-choose-us" className="py-16 bg-black relative overflow-hidden">
       <Particles
         className="absolute inset-0"
         quantity={80}
@@ -125,8 +125,8 @@ export function WhyChooseUsSection() {
       />
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 relative z-10">
         {/* Header */}
-        <div className="mb-12 md:mb-16">
-          <div className="flex items-baseline mb-4 sm:mb-6">
+        <div className="mb-12 md:mb-16" suppressHydrationWarning>
+          <div className="flex items-baseline mb-4 sm:mb-6" suppressHydrationWarning>
             <h2
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-white mr-2 sm:mr-4"
               style={{ fontFamily: "'Druk Trial', sans-serif" }}

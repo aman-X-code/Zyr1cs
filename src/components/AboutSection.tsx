@@ -92,7 +92,7 @@ export function AboutSection() {
         </div>
 
         {/* Team Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
           {team.map((member, index) => {
             const isFlipped = flippedCards.includes(index);
             return (
@@ -102,7 +102,7 @@ export function AboutSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="group relative h-[550px] cursor-pointer"
+                className="group relative h-[450px] sm:h-[500px] lg:h-[550px] cursor-pointer"
                 style={{ perspective: "1000px" }}
                 onClick={() => toggleFlip(index)}
               >
@@ -137,14 +137,14 @@ export function AboutSection() {
                   <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
 
                   {/* Content container */}
-                  <div className="relative h-full flex flex-col justify-between p-8">
+                  <div className="relative h-full flex flex-col justify-between p-6 sm:p-8">
                     {/* Top section - minimal */}
                     <div className="flex justify-between items-start">
                       <div className="w-12 h-1 bg-gradient-to-r from-white to-transparent" />
                     </div>
 
                     {/* Middle section - Name (positioned at 60% height) */}
-                    <div className="absolute left-8 right-8" style={{ top: '55%' }}>
+                    <div className="absolute left-6 right-6 sm:left-8 sm:right-8" style={{ top: '55%' }}>
                       <motion.div
                         initial={{ x: -20, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
@@ -152,7 +152,7 @@ export function AboutSection() {
                         transition={{ duration: 0.6, delay: index * 0.2 + 0.3 }}
                       >
                         <h3
-                          className="text-4xl md:text-5xl font-black text-white mb-3 leading-none tracking-wider"
+                          className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-3 leading-none tracking-wider"
                           style={{ fontFamily: "'Druk Trial', sans-serif" }}
                         >
                           {member.name.split(' ').map((word, i) => (
@@ -184,7 +184,7 @@ export function AboutSection() {
 
                 {/* Back of card */}
                 <div 
-                  className="absolute inset-0 h-full bg-gradient-to-br from-gray-900 to-black rounded-lg overflow-hidden border p-8"
+                  className="absolute inset-0 h-full bg-gradient-to-br from-gray-900 to-black rounded-lg overflow-hidden border p-6 sm:p-8"
                   style={{ 
                     borderColor: '#27272A',
                     backfaceVisibility: "hidden",
@@ -196,7 +196,7 @@ export function AboutSection() {
                     {/* Header */}
                     <div>
                       <h3 
-                        className="text-3xl font-black text-white mb-2 tracking-wider"
+                        className="text-2xl sm:text-3xl font-black text-white mb-2 tracking-wider"
                         style={{ fontFamily: "'Druk Trial', sans-serif" }}
                       >
                         {member.name}
