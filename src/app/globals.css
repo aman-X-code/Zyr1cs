@@ -37,6 +37,23 @@ html {
   }
 }
 
+@keyframes orbit {
+  0% {
+    transform: rotate(calc(var(--angle) * 1deg))
+      translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
+  }
+  100% {
+    transform: rotate(calc(var(--angle) * 1deg + 360deg))
+      translateY(calc(var(--radius) * 1px))
+      rotate(calc((var(--angle) * -1deg) - 360deg));
+  }
+}
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 .animate-pulse-spotlight {
   animation: spotlight 2s ease-out 0.75s forwards;
 }
@@ -52,6 +69,7 @@ html {
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --animate-orbit: orbit calc(var(--duration) * 1s) linear infinite;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -163,9 +181,62 @@ html {
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    cursor: none !important;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
+  
+  /* Allow text selection for content */
+  p, span, h1, h2, h3, h4, h5, h6, li, td, th, label {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+  
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Custom text selection color - Greyish theme */
+  ::selection {
+    background-color: rgba(156, 163, 175, 0.4); /* Grey with transparency */
+    color: #ffffff;
+  }
+  
+  ::-moz-selection {
+    background-color: rgba(156, 163, 175, 0.4);
+    color: #ffffff;
+  }
+  
+  /* Keep text cursor for inputs */
+  input,
+  textarea,
+  select {
+    cursor: text !important;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+  
+  /* Keep pointer for buttons and links */
+  button,
+  a {
+    cursor: none !important;
+  }
+  
+  /* Remove tap highlight on mobile for all interactive elements */
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    -webkit-tap-highlight-color: transparent;
   }
   
   /* Custom scrollbar styling */

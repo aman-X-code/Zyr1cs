@@ -3,11 +3,23 @@
 import PixelCard from "./PixelCard";
 import Ballpit from "./Ballpit";
 import BlurText from "./BlurText";
+import { HoverSlider, TextStaggerHover, HoverSliderImageWrap, HoverSliderCard } from "./HoverSlider";
+import { Iphone } from "./ui/iphone";
+import TerminalCard from "./TerminalCard";
+import { OrbitingCircles } from "./ui/orbiting-circles";
+import { Icons } from "./Icons";
+import { Particles } from "./ui/Particles";
 
 export function ServicesSection() {
-
   return (
-    <section id="services" className="py-12 sm:py-16 md:py-20 bg-black relative overflow-hidden" suppressHydrationWarning>
+    <section id="services" className="py-12 bg-black relative overflow-hidden" suppressHydrationWarning>
+      <Particles
+        className="absolute inset-0"
+        quantity={80}
+        ease={80}
+        color="#ffffff"
+        refresh
+      />
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 relative z-10" suppressHydrationWarning>
         {/* Section Header */}
         <div className="mb-8 sm:mb-12 md:mb-16" suppressHydrationWarning>
@@ -28,102 +40,105 @@ export function ServicesSection() {
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 justify-items-center" suppressHydrationWarning>
-          {/* Web Development */}
-          <PixelCard variant="blue" className="w-full max-w-[340px] h-auto min-h-[280px] sm:min-h-[300px]">
-            <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between z-10" suppressHydrationWarning>
-              {/* Service Title */}
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
-                WEB DEVELOPMENT
-              </h3>
-              
-              {/* Service Description */}
-              <p className="text-gray-200 leading-relaxed mb-6 text-sm md:text-base" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
-                Complete websites and web applications. From design to deployment, we create modern, fast, and user-friendly websites that grow your business.
-              </p>
-
-              {/* Call to Action */}
-              <button className="text-blue-400 hover:text-blue-300 font-semibold flex items-center group-hover:translate-x-2 transition-all duration-300" suppressHydrationWarning>
-                Build Your Website
-                <span className="ml-2">→</span>
-              </button>
+        {/* Services Hover Slider */}
+        <HoverSlider className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start" suppressHydrationWarning>
+          {/* Left Side - Service Names */}
+          <div className="flex-1 space-y-4 pointer-events-none" suppressHydrationWarning>
+            <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white w-fit" style={{ fontFamily: "'Druk Trial', sans-serif" }} suppressHydrationWarning>
+              <TextStaggerHover text="WEB DESIGN" index={0} className="block mb-2 pointer-events-auto w-fit" />
+              <TextStaggerHover text="MOBILE APPLICATION" index={1} className="block mb-2 pointer-events-auto w-fit" />
+              <TextStaggerHover text="AI AUTOMATION" index={2} className="block mb-2 pointer-events-auto w-fit" />
+              <TextStaggerHover text="CLOUD SERVICES" index={3} className="block mb-2 pointer-events-auto w-fit" />
             </div>
-            
-            {/* Ballpit Background */}
-            <div className="absolute inset-0 z-0" suppressHydrationWarning>
-              <Ballpit
-                className="w-full h-full"
-              />
-            </div>
-          </PixelCard>
+          </div>
 
-          {/* Mobile App */}
-          <PixelCard variant="blue" className="w-full max-w-[340px] h-auto min-h-[280px] sm:min-h-[300px]">
-            <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between z-10" suppressHydrationWarning>
-              {/* Service Title */}
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
-                MOBILE<br />APPLICATION
-              </h3>
-              
-              {/* Service Description */}
-              <p className="text-gray-200 leading-relaxed mb-6 text-sm md:text-base" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
-                iOS and Android mobile applications. We build apps that your customers will love, with smooth performance and beautiful design.
-              </p>
+          {/* Right Side - Service Cards */}
+          <div className="flex-1 w-full lg:w-auto" suppressHydrationWarning>
+            <HoverSliderImageWrap className="w-full max-w-[400px] h-[400px] lg:h-[450px] overflow-visible" suppressHydrationWarning>
+              {/* Web Development */}
+              <HoverSliderCard index={0}>
+                <PixelCard variant="blue" className="w-full h-full">
+                  <div className="absolute inset-0 p-4 md:p-6 flex flex-col z-10" suppressHydrationWarning>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
+                      WEB DESIGN
+                    </h3>
+                    
+                    <p className="text-gray-200 leading-relaxed text-sm md:text-base" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
+                      Complete websites and web applications. From design to deployment, we create modern, fast, and user-friendly websites that grow your business.
+                    </p>
+                  </div>
+                  
+                  <div className="absolute inset-0 z-0" suppressHydrationWarning>
+                    <Ballpit className="w-full h-full" />
+                  </div>
+                </PixelCard>
+              </HoverSliderCard>
 
-              {/* Call to Action */}
-              <button className="text-blue-400 hover:text-blue-300 font-semibold flex items-center group-hover:translate-x-2 transition-all duration-300" suppressHydrationWarning>
-                Create Your App
-                <span className="ml-2">→</span>
-              </button>
-            </div>
-            
-          </PixelCard>
+              {/* Mobile App */}
+              <HoverSliderCard index={1}>
+                <div className="w-full h-full flex items-start justify-center pt-1 px-8 overflow-hidden">
+                  <Iphone 
+                    src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159868/mobile_cy4hqb.jpg"
+                    className="h-[110%] w-auto drop-shadow-2xl scale-110"
+                  />
+                </div>
+              </HoverSliderCard>
 
-          {/* AI Automation */}
-          <PixelCard variant="blue" className="w-full max-w-[340px] h-auto min-h-[280px] sm:min-h-[300px]">
-            <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between z-10" suppressHydrationWarning>
-              {/* Service Title */}
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
-                AI AUTOMATION
-              </h3>
-              
-              {/* Service Description */}
-              <p className="text-gray-200 leading-relaxed mb-6 text-sm md:text-base" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
-                Smart automation and AI tools. We help you automate tasks, analyze data, and create intelligent systems that save time and boost efficiency.
-              </p>
+              {/* AI Automation */}
+              <HoverSliderCard index={2}>
+                <PixelCard variant="blue" className="w-full h-full">
+                  <div className="absolute inset-0 flex items-center justify-center z-0">
+                    <OrbitingCircles iconSize={50} radius={80} duration={20}>
+                      {/* Claude AI */}
+                      <div className="size-12 rounded-full overflow-hidden flex items-center justify-center shadow-xl">
+                        <img src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159864/claude_hbpqze.svg" alt="Claude AI" className="size-full" />
+                      </div>
+                      {/* Grok (X.AI) */}
+                      <div className="size-12 rounded-full overflow-hidden flex items-center justify-center shadow-xl">
+                        <img src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159866/grok_fvn6e4.svg" alt="Grok" className="size-full" />
+                      </div>
+                    </OrbitingCircles>
+                    <OrbitingCircles iconSize={50} radius={150} duration={25} reverse>
+                      {/* Google Gemini */}
+                      <div className="size-12 rounded-full overflow-hidden flex items-center justify-center shadow-xl">
+                        <img src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159864/gemini_wxdwz3.svg" alt="Gemini" className="size-full" />
+                      </div>
+                      <div className="size-12 rounded-full bg-white flex items-center justify-center shadow-xl">
+                        <svg className="size-8" viewBox="0 0 24 24" fill="#181717">
+                          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                      </div>
+                      <div className="size-12 rounded-full bg-white flex items-center justify-center shadow-xl">
+                        <img src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png" alt="Google" className="size-8" />
+                      </div>
+                    </OrbitingCircles>
+                  </div>
+                </PixelCard>
+              </HoverSliderCard>
 
-              {/* Call to Action */}
-              <button className="text-blue-400 hover:text-blue-300 font-semibold flex items-center group-hover:translate-x-2 transition-all duration-300" suppressHydrationWarning>
-                Get AI-Powered
-                <span className="ml-2">→</span>
-              </button>
-            </div>
-            
-          </PixelCard>
-
-          {/* Cloud Services */}
-          <PixelCard variant="blue" className="w-full max-w-[340px] h-auto min-h-[280px] sm:min-h-[300px]">
-            <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between z-10" suppressHydrationWarning>
-              {/* Service Title */}
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
-                CLOUD SERVICES
-              </h3>
-              
-              {/* Service Description */}
-              <p className="text-gray-200 leading-relaxed mb-6 text-sm md:text-base" style={{ fontFamily: "'Quicksand', sans-serif" }} suppressHydrationWarning>
-                Reliable cloud hosting and backend services. We manage your servers, databases, and APIs so you can focus on growing your business.
-              </p>
-
-              {/* Call to Action */}
-              <button className="text-blue-400 hover:text-blue-300 font-semibold flex items-center group-hover:translate-x-2 transition-all duration-300" suppressHydrationWarning>
-                Host Your Project
-                <span className="ml-2">→</span>
-              </button>
-            </div>
-            
-          </PixelCard>
-        </div>
+              {/* Cloud Services */}
+              <HoverSliderCard index={3}>
+                <PixelCard variant="blue" className="w-full h-full">
+                  <div className="absolute inset-0 p-4 md:p-6 flex flex-col z-10" suppressHydrationWarning>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Unbounded', sans-serif" }} suppressHydrationWarning>
+                      CLOUD SERVICES
+                    </h3>
+                    
+                    <div className="flex-1 flex items-center justify-center">
+                      <TerminalCard 
+                        command={`kubectl apply -f deployment.yaml
+docker build -t myapp:latest .
+aws s3 sync ./build s3://bucket`}
+                        language="bash"
+                        className="w-full"
+                      />
+                    </div>
+                  </div>
+                </PixelCard>
+              </HoverSliderCard>
+            </HoverSliderImageWrap>
+          </div>
+        </HoverSlider>
       </div>
     </section>
   );

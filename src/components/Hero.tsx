@@ -2,6 +2,9 @@
 
 import { Component as RaycastAnimatedBackground } from "@/components/raycast-animated-blue-background";
 import { Spotlight } from "@/components/ui/spotlight";
+import { ScribbleUnderline } from "@/components/ui/scribble-underline";
+import { AvatarCircles } from "@/components/ui/AvatarCircles";
+import { motion } from "framer-motion";
 
 export function HeroSection() {
   return (
@@ -25,13 +28,37 @@ export function HeroSection() {
             Building
           </h1>
           <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold text-gray-200 leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1.3s' }} suppressHydrationWarning>
-            Extraordinary
+            <ScribbleUnderline color="#22d3ee" delay={1.5}>
+              Extraordinary
+            </ScribbleUnderline>
           </h1>
           <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold text-gray-200 leading-tight tracking-wide uppercase opacity-0 animate-fade-in-up" style={{ fontFamily: "'Druk Trial', sans-serif", animationDelay: '1.6s' }} suppressHydrationWarning>
             Digital Solutions
           </h1>
         </div>
       </div>
+
+      {/* Client Avatars - Bottom Right */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 2 }}
+        className="absolute bottom-8 right-8 z-20 hidden md:flex flex-col items-end gap-2"
+        suppressHydrationWarning
+      >
+        <AvatarCircles
+          numPeople={26}
+          avatarUrls={[
+            "https://xsgames.co/randomusers/assets/avatars/male/1.jpg",
+            "https://xsgames.co/randomusers/assets/avatars/female/2.jpg",
+            "https://xsgames.co/randomusers/assets/avatars/male/3.jpg",
+            "https://xsgames.co/randomusers/assets/avatars/female/4.jpg",
+          ]}
+        />
+        <p className="text-white text-sm font-medium" style={{ fontFamily: "'Quicksand', sans-serif" }}>
+          Trusted by 30+ clients
+        </p>
+      </motion.div>
     </section>
   );
 }

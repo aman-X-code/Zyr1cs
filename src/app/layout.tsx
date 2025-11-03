@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +16,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Agency Website",
-  description: "Professional agency website built with Next.js",
+  title: "Zyr1cs | Digital Solutions Agency",
+  description: "Professional digital agency specializing in web design, mobile applications, AI automation, and cloud services.",
+  icons: {
+    icon: 'https://res.cloudinary.com/dave3np5n/image/upload/v1762159871/ztop_bdnqrf.png',
+    shortcut: 'https://res.cloudinary.com/dave3np5n/image/upload/v1762159871/ztop_bdnqrf.png',
+    apple: 'https://res.cloudinary.com/dave3np5n/image/upload/v1762159871/ztop_bdnqrf.png',
+  },
 };
 
 export default function RootLayout({
@@ -32,8 +38,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased cursor-none`}
       >
+        <SmoothCursor />
         <Header />
         {children}
         <Footer />

@@ -8,7 +8,8 @@ import { Menu, X } from "lucide-react"
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "Services", href: "#services" },
-  { name: "Portfolio", href: "#portfolio" },
+  { name: "Why Us", href: "#why-choose-us" },
+  { name: "Work", href: "#portfolio" },
   { name: "About", href: "#about" },
   { name: "Contact", href: "#contact" },
 ]
@@ -16,6 +17,7 @@ const navItems = [
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const [isScrolled, setIsScrolled] = useState(false)
 
   // Smooth scroll function
   const scrollToSection = (sectionId: string) => {
@@ -29,11 +31,18 @@ const Header = () => {
     setIsMenuOpen(false) // Close mobile menu after navigation
   }
 
-  // Scroll spy functionality to detect active section
+  // Scroll spy functionality to detect active section and logo change
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'services', 'portfolio', 'about', 'contact']
+      const sections = ['home', 'services', 'why-choose-us', 'portfolio', 'about', 'contact']
       const scrollPosition = window.scrollY + 150 // Increased offset for better detection
+
+      // Check if scrolled past hero section (approximately 80vh)
+      const heroSection = document.getElementById('home')
+      if (heroSection) {
+        const heroHeight = heroSection.offsetHeight
+        setIsScrolled(window.scrollY > heroHeight * 0.7)
+      }
 
       let currentSection = 'home'
 
@@ -132,8 +141,8 @@ const Header = () => {
     <div suppressHydrationWarning>
       {/* Company Logo - Outside Header, Positioned Left */}
       <motion.div
-        className="fixed top-2 sm:top-4 left-2 sm:left-4 md:left-8 z-[200]"
-        initial={{ y: 0 }}
+        className="fixed top-4 sm:top-5 md:top-7 left-2 sm:left-4 md:left-8 z-[200]"
+        initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{
           duration: 0.8,
@@ -143,14 +152,44 @@ const Header = () => {
         suppressHydrationWarning
       >
         <button onClick={() => scrollToSection('#home')} suppressHydrationWarning>
-          <Image
-            src="/images/white.png"
-            alt="Zyr1cs Logo"
-            width={180}
-            height={60}
-            className="h-10 sm:h-12 md:h-16 w-auto object-contain"
+          <motion.div
+            initial={false}
+            animate={{
+              opacity: isScrolled ? 0 : 1,
+              scale: isScrolled ? 0.8 : 1,
+            }}
+            transition={{ duration: 0.3 }}
+            className={isScrolled ? "absolute" : "relative"}
             suppressHydrationWarning
-          />
+          >
+            <Image
+              src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159871/white_in5rof.png"
+              alt="Zyr1cs Logo"
+              width={110}
+              height={38}
+              className="h-7 sm:h-8 md:h-9 w-auto object-contain"
+              suppressHydrationWarning
+            />
+          </motion.div>
+          <motion.div
+            initial={false}
+            animate={{
+              opacity: isScrolled ? 1 : 0,
+              scale: isScrolled ? 1 : 0.8,
+            }}
+            transition={{ duration: 0.3 }}
+            className={!isScrolled ? "absolute" : "relative"}
+            suppressHydrationWarning
+          >
+            <Image
+              src="https://res.cloudinary.com/dave3np5n/image/upload/v1762159870/whitehalf_xrwoeb.png"
+              alt="Z1 Logo"
+              width={40}
+              height={40}
+              className="h-7 sm:h-8 md:h-9 w-auto object-contain"
+              suppressHydrationWarning
+            />
+          </motion.div>
         </button>
       </motion.div>
 
@@ -208,7 +247,7 @@ const Header = () => {
       {/* CTA Button - Right Corner - Hidden on mobile */}
       <motion.div
         className="hidden md:block fixed top-3 sm:top-4 md:top-6 right-2 sm:right-4 md:right-8 z-[200]"
-        initial={{ y: 0 }}
+        initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{
           duration: 0.8,

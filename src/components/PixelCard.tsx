@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
-import { JSX } from 'react';
-import './PixelCard.css';
+import { useEffect, useRef } from "react";
+import { JSX } from "react";
+import "./PixelCard.css";
 
 class Pixel {
   width: number;
@@ -60,7 +60,12 @@ class Pixel {
   draw() {
     const centerOffset = this.maxSizeInteger * 0.5 - this.size * 0.5;
     this.ctx.fillStyle = this.color;
-    this.ctx.fillRect(this.x + centerOffset, this.y + centerOffset, this.size, this.size);
+    this.ctx.fillRect(
+      this.x + centerOffset,
+      this.y + centerOffset,
+      this.size,
+      this.size
+    );
   }
 
   appear() {
@@ -125,40 +130,42 @@ const VARIANTS = {
     activeColor: null,
     gap: 5,
     speed: 35,
-    colors: '#f8fafc,#f1f5f9,#cbd5e1',
-    noFocus: false
+    colors: "#f8fafc,#f1f5f9,#cbd5e1",
+    noFocus: false,
   },
   blue: {
-    activeColor: '#e0f2fe',
+    activeColor: "#e0f2fe",
     gap: 10,
     speed: 25,
-    colors: '#e0f2fe,#7dd3fc,#0ea5e9',
-    noFocus: false
+    colors: "#e0f2fe,#7dd3fc,#0ea5e9",
+    noFocus: false,
   },
   yellow: {
-    activeColor: '#fef08a',
+    activeColor: "#fef08a",
     gap: 3,
     speed: 20,
-    colors: '#fef08a,#fde047,#eab308',
-    noFocus: false
+    colors: "#fef08a,#fde047,#eab308",
+    noFocus: false,
   },
   pink: {
-    activeColor: '#fecdd3',
+    activeColor: "#fecdd3",
     gap: 6,
     speed: 80,
-    colors: '#fecdd3,#fda4af,#e11d48',
-    noFocus: true
-  }
+    colors: "#fecdd3,#fda4af,#e11d48",
+    noFocus: true,
+  },
 };
 
 interface PixelCardProps {
-  variant?: 'default' | 'blue' | 'yellow' | 'pink';
+  variant?: "default" | "blue" | "yellow" | "pink";
   gap?: number;
   speed?: number;
   colors?: string;
   noFocus?: boolean;
   className?: string;
   children: React.ReactNode;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
 interface VariantConfig {
@@ -170,20 +177,28 @@ interface VariantConfig {
 }
 
 export default function PixelCard({
-  variant = 'default',
+  variant = "default",
   gap,
   speed,
   colors,
   noFocus,
-  className = '',
-  children
+  className = "",
+  children,
+  onMouseEnter: externalOnMouseEnter,
+  onMouseLeave: externalOnMouseLeave,
 }: PixelCardProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pixelsRef = useRef<Pixel[]>([]);
-  const animationRef = useRef<ReturnType<typeof requestAnimationFrame> | null>(null);
+  const animationRef = useRef<ReturnType<typeof requestAnimationFrame> | null>(
+    null
+  );
   const timePreviousRef = useRef(performance.now());
-  const reducedMotion = useRef(typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false).current;
+  const reducedMotion = useRef(
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false
+  ).current;
 
   const variantCfg: VariantConfig = VARIANTS[variant] || VARIANTS.default;
   const finalGap = gap ?? variantCfg.gap;
@@ -197,25 +212,36 @@ export default function PixelCard({
     const rect = containerRef.current.getBoundingClientRect();
     const width = Math.floor(rect.width);
     const height = Math.floor(rect.height);
-    const ctx = canvasRef.current.getContext('2d');
+    const ctx = canvasRef.current.getContext("2d");
 
     canvasRef.current.width = width;
     canvasRef.current.height = height;
     canvasRef.current.style.width = `${width}px`;
     canvasRef.current.style.height = `${height}px`;
 
-    const colorsArray = finalColors.split(',');
+    const colorsArray = finalColors.split(",");
     const pxs = [];
     for (let x = 0; x < width; x += parseInt(finalGap.toString(), 10)) {
       for (let y = 0; y < height; y += parseInt(finalGap.toString(), 10)) {
-        const color = colorsArray[Math.floor(Math.random() * colorsArray.length)];
+        const color =
+          colorsArray[Math.floor(Math.random() * colorsArray.length)];
 
         const dx = x - width / 2;
         const dy = y - height / 2;
         const distance = Math.sqrt(dx * dx + dy * dy);
         const delay = reducedMotion ? 0 : distance;
         if (!ctx) return;
-        pxs.push(new Pixel(canvasRef.current, ctx, x, y, color, getEffectiveSpeed(finalSpeed, reducedMotion), delay));
+        pxs.push(
+          new Pixel(
+            canvasRef.current,
+            ctx,
+            x,
+            y,
+            color,
+            getEffectiveSpeed(finalSpeed, reducedMotion),
+            delay
+          )
+        );
       }
     }
     pixelsRef.current = pxs;
@@ -230,7 +256,7 @@ export default function PixelCard({
     if (timePassed < timeInterval) return;
     timePreviousRef.current = timeNow - (timePassed % timeInterval);
 
-    const ctx = canvasRef.current?.getContext('2d');
+    const ctx = canvasRef.current?.getContext("2d");
     if (!ctx || !canvasRef.current) return;
 
     ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
@@ -238,7 +264,7 @@ export default function PixelCard({
     let allIdle = true;
     for (let i = 0; i < pixelsRef.current.length; i++) {
       const pixel = pixelsRef.current[i];
-      // @ts-ignore
+      // @ts-expect-error - Dynamic method call using bracket notation, fnName is constrained to valid Pixel methods
       pixel[fnName]();
       if (!pixel.isIdle) {
         allIdle = false;
@@ -256,15 +282,21 @@ export default function PixelCard({
     animationRef.current = requestAnimationFrame(() => doAnimate(name));
   };
 
-  const onMouseEnter = () => handleAnimation('appear');
-  const onMouseLeave = () => handleAnimation('disappear');
-  const onFocus: React.FocusEventHandler<HTMLDivElement> = e => {
-    if (e.currentTarget.contains(e.relatedTarget)) return;
-    handleAnimation('appear');
+  const onMouseEnter = () => {
+    handleAnimation("appear");
+    externalOnMouseEnter?.();
   };
-  const onBlur: React.FocusEventHandler<HTMLDivElement> = e => {
+  const onMouseLeave = () => {
+    handleAnimation("disappear");
+    externalOnMouseLeave?.();
+  };
+  const onFocus: React.FocusEventHandler<HTMLDivElement> = (e) => {
     if (e.currentTarget.contains(e.relatedTarget)) return;
-    handleAnimation('disappear');
+    handleAnimation("appear");
+  };
+  const onBlur: React.FocusEventHandler<HTMLDivElement> = (e) => {
+    if (e.currentTarget.contains(e.relatedTarget)) return;
+    handleAnimation("disappear");
   };
 
   useEffect(() => {
@@ -295,7 +327,11 @@ export default function PixelCard({
       tabIndex={finalNoFocus ? -1 : 0}
       suppressHydrationWarning
     >
-      <canvas className="pixel-canvas" ref={canvasRef} suppressHydrationWarning />
+      <canvas
+        className="pixel-canvas"
+        ref={canvasRef}
+        suppressHydrationWarning
+      />
       {children}
     </div>
   );
