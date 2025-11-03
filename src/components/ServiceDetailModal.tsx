@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
@@ -20,6 +21,13 @@ interface ServiceDetailModalProps {
 }
 
 export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailModalProps) {
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
+
   // Prevent body scroll when modal is open
   React.useEffect(() => {
     if (isOpen) {
@@ -33,7 +41,9 @@ export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailMo
     };
   }, [isOpen]);
 
-  return (
+  if (!mounted) return null;
+
+  const modalContent = (
     <AnimatePresence>
       {isOpen && (
         <>
@@ -43,7 +53,8 @@ export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailMo
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+            style={{ zIndex: 99998 }}
           />
 
           {/* Modal */}
@@ -51,7 +62,8 @@ export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailMo
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed inset-4 md:inset-12 lg:inset-20 xl:inset-32 bg-gradient-to-br from-gray-900 to-black border border-cyan-400/30 rounded-2xl z-50 overflow-hidden max-w-6xl mx-auto"
+            className="fixed inset-4 md:inset-12 lg:inset-20 xl:inset-32 bg-gradient-to-br from-gray-900 to-black border border-cyan-400/30 rounded-2xl overflow-hidden max-w-6xl mx-auto"
+            style={{ zIndex: 99999 }}
           >
             <div className="h-full flex flex-col">
               {/* Header */}
@@ -224,4 +236,6 @@ export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailMo
       )}
     </AnimatePresence>
   );
+
+  return createPortal(modalContent, document.body);
 }
