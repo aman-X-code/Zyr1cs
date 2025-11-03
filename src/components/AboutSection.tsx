@@ -10,7 +10,7 @@ import { Github, Linkedin, Instagram, Globe } from "lucide-react";
 const team = [
   {
     name: "Aman Khanna",
-    role: "Founder & Full-Stack Developer",
+    role: "Founder & CEO",
     image: "https://res.cloudinary.com/dave3np5n/image/upload/v1762159869/aman_xwwmlj.jpg",
     specialty: "Full Stack Development | UI/UX Design | DevOps",
     bio: "Full-stack developer passionate about building scalable and user-centric web applications. Specializing in creating seamless digital experiences by integrating functionality with intuitive UI/UX design. B.Tech in Computer Science from VIT Chennai.",

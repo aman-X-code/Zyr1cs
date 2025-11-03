@@ -11,8 +11,9 @@ export function ContactSection() {
     email: "",
     phone: "",
     company: "",
-    budget: "",
+    service: "",
     message: "",
+    driveLink: "",
   });
 
   const [focusedField, setFocusedField] = useState<string | null>(null);
@@ -31,7 +32,10 @@ export function ContactSection() {
     return phoneRegex.test(phone);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     let hasErrors = false;
@@ -50,8 +54,39 @@ export function ContactSection() {
     setErrors(newErrors);
 
     if (!hasErrors) {
-      console.log("Form submitted:", formData);
-      alert("Message sent successfully!");
+      setIsSubmitting(true);
+      setSubmitStatus('idle');
+
+      try {
+        const response = await fetch('https://formspree.io/f/xqagvlaz', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          setSubmitStatus('success');
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            company: "",
+            service: "",
+            message: "",
+            driveLink: "",
+          });
+          setTimeout(() => setSubmitStatus('idle'), 5000);
+        } else {
+          setSubmitStatus('error');
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        setSubmitStatus('error');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -241,10 +276,10 @@ export function ContactSection() {
                 {/* Service Selection */}
                 <div className="relative group">
                   <select
-                    name="budget"
-                    value={formData.budget}
+                    name="service"
+                    value={formData.service}
                     onChange={handleChange}
-                    onFocus={() => setFocusedField("budget")}
+                    onFocus={() => setFocusedField("service")}
                     onBlur={() => setFocusedField(null)}
                     className="w-full bg-white/5 border-2 border-gray-800 focus:border-white rounded-xl px-4 sm:px-6 py-3 sm:py-4 text-white outline-none transition-all duration-300 appearance-none cursor-pointer"
                     style={{ fontFamily: "'Quicksand', sans-serif" }}
@@ -252,19 +287,19 @@ export function ContactSection() {
                     <option value="" className="bg-black">
                       Select Service
                     </option>
-                    <option value="web" className="bg-black">
+                    <option value="Web Development" className="bg-black">
                       Web Development
                     </option>
-                    <option value="mobile" className="bg-black">
+                    <option value="Mobile Application" className="bg-black">
                       Mobile Application
                     </option>
-                    <option value="ai" className="bg-black">
+                    <option value="AI Automation" className="bg-black">
                       AI Automation
                     </option>
-                    <option value="cloud" className="bg-black">
+                    <option value="Cloud Services" className="bg-black">
                       Cloud Services
                     </option>
-                    <option value="other" className="bg-black">
+                    <option value="Other" className="bg-black">
                       Other
                     </option>
                   </select>
@@ -283,7 +318,7 @@ export function ContactSection() {
                   </svg>
                   <div
                     className={`absolute inset-0 rounded-xl bg-white/5 -z-10 blur-xl transition-opacity duration-300 ${
-                      focusedField === "budget" ? "opacity-100" : "opacity-0"
+                      focusedField === "service" ? "opacity-100" : "opacity-0"
                     }`}
                   />
                 </div>
@@ -309,14 +344,76 @@ export function ContactSection() {
                   />
                 </div>
 
+                {/* Google Drive Link */}
+                <div className="relative group">
+                  <div className="flex items-start gap-3 bg-white/5 border-2 border-gray-800 focus-within:border-white rounded-xl px-4 sm:px-6 py-3 sm:py-4 transition-all duration-300">
+                    <svg
+                      className="w-6 h-6 text-gray-400 flex-shrink-0 mt-0.5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                      />
+                    </svg>
+                    <div className="flex-1">
+                      <input
+                        type="url"
+                        name="driveLink"
+                        value={formData.driveLink}
+                        onChange={handleChange}
+                        onFocus={() => setFocusedField("driveLink")}
+                        onBlur={() => setFocusedField(null)}
+                        placeholder="Google Drive / Dropbox Link (Optional)"
+                        className="w-full bg-transparent text-white placeholder-gray-500 outline-none"
+                        style={{ fontFamily: "'Quicksand', sans-serif" }}
+                      />
+                      <p className="text-gray-600 text-xs mt-1" style={{ fontFamily: "'Quicksand', sans-serif" }}>
+                        Share a link to your files (make sure it&apos;s publicly accessible)
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className={`absolute inset-0 rounded-xl bg-white/5 -z-10 blur-xl transition-opacity duration-300 ${
+                      focusedField === "driveLink" ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                </div>
+
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-white text-black font-black text-lg sm:text-xl py-4 sm:py-5 rounded-xl hover:bg-gray-200 transition-colors duration-300 tracking-wider"
+                  disabled={isSubmitting}
+                  className={`w-full font-black text-lg sm:text-xl py-4 sm:py-5 rounded-xl transition-colors duration-300 tracking-wider ${
+                    isSubmitting 
+                      ? 'bg-gray-400 cursor-not-allowed' 
+                      : submitStatus === 'success'
+                      ? 'bg-green-500 text-white'
+                      : submitStatus === 'error'
+                      ? 'bg-red-500 text-white'
+                      : 'bg-white text-black hover:bg-gray-200'
+                  }`}
                   style={{ fontFamily: "'Druk Trial', sans-serif" }}
                 >
-                  SEND MESSAGE
+                  {isSubmitting 
+                    ? 'SENDING...' 
+                    : submitStatus === 'success'
+                    ? '✓ MESSAGE SENT!'
+                    : submitStatus === 'error'
+                    ? '✗ FAILED - TRY AGAIN'
+                    : 'SEND MESSAGE'
+                  }
                 </button>
+
+                {submitStatus === 'success' && (
+                  <p className="text-green-400 text-center text-sm" style={{ fontFamily: "'Quicksand', sans-serif" }}>
+                    Thank you! We&apos;ll get back to you within 24 hours.
+                  </p>
+                )}
               </form>
             </motion.div>
 
