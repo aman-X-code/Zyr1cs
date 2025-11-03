@@ -135,17 +135,16 @@ const Footer = () => {
                   {socialLinks.map((social) => {
                     const IconComponent = social.icon;
                     return (
-                      <a
+                      <button
                         key={social.name}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`text-gray-400 ${social.color} transition-colors duration-300 p-1.5 sm:p-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50`}
-                        aria-label={social.name}
+                        onClick={(e) => e.preventDefault()}
+                        className={`text-gray-400 ${social.color} transition-colors duration-300 p-1.5 sm:p-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 cursor-not-allowed opacity-50`}
+                        aria-label={`${social.name} (Coming Soon)`}
+                        title="Coming Soon"
                         suppressHydrationWarning
                       >
                         <IconComponent size={16} className="sm:w-[18px] sm:h-[18px]" />
-                      </a>
+                      </button>
                     );
                   })}
                 </div>
