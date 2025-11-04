@@ -327,7 +327,7 @@ const Header = () => {
       <motion.div
         initial={false}
         animate={{
-          height: isMenuOpen ? '60vh' : '0vh',
+          height: isMenuOpen ? 'auto' : '0vh',
           opacity: isMenuOpen ? 1 : 0,
           pointerEvents: isMenuOpen ? "auto" : "none",
         }}
@@ -340,13 +340,14 @@ const Header = () => {
           top: '4.5rem',
           background: '#000000',
           transformOrigin: 'top',
+          maxHeight: '70vh',
         }}
         suppressHydrationWarning
       >
 
-        <div className="flex flex-col justify-center items-center h-full px-6 py-8 relative z-10">
+        <div className="flex flex-col justify-start items-center px-4 py-4 relative z-10">
           {/* Menu Items - Centered with active having background */}
-          <div className="w-full max-w-lg space-y-8">
+          <div className="w-full max-w-lg space-y-2">
             {navItems.map((item, index) => {
               const isActive = activeSection === item.href.replace('#', '')
               return (
@@ -366,7 +367,7 @@ const Header = () => {
                 >
                   <motion.button
                     onClick={() => scrollToSection(item.href)}
-                    className="w-full text-center py-3 px-6 relative group rounded-2xl"
+                    className="w-full text-center py-2 px-4 relative group rounded-2xl"
                     animate={{
                       scale: isActive ? 1 : 0.95,
                     }}
@@ -390,8 +391,8 @@ const Header = () => {
                       }`}
                       style={{
                         fontFamily: "'Druk Trial', sans-serif",
-                        fontSize: isActive ? '2.5rem' : '1.5rem',
-                        letterSpacing: '0.08em',
+                        fontSize: isActive ? 'clamp(1.75rem, 6vw, 2.5rem)' : 'clamp(1.25rem, 4.5vw, 1.5rem)',
+                        letterSpacing: '0.05em',
                         lineHeight: '1.2',
                         transition: 'all 0.4s cubic-bezier(0.76, 0, 0.24, 1)',
                       }}
