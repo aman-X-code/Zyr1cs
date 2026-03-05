@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: false,
+  turbopack: {},
   transpilePackages: ['unicornstudio-react', 'three', 'gsap'],
   images: {
     remotePatterns: [
