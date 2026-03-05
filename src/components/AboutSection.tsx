@@ -24,7 +24,7 @@ const team = [
     },
   },
   {
-    name: "Team Member",
+    name: "Yash Mangla",
     role: "Creative Director",
     image: "https://res.cloudinary.com/dave3np5n/image/upload/v1772703797/yash_xepmb0.jpg",
     specialty: "UI/UX Design",
@@ -39,7 +39,7 @@ const team = [
     },
   },
   {
-    name: "Team Member",
+    name: "Falgun Patil",
     role: "Tech Lead",
     image: "https://res.cloudinary.com/dave3np5n/image/upload/v1772704021/falgun_isotwa.jpg",
     specialty: "System Architecture",
