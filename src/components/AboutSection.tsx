@@ -26,7 +26,7 @@ const team = [
   {
     name: "Team Member",
     role: "Creative Director",
-    image: "/images/team2.jpg",
+    image: "https://res.cloudinary.com/dave3np5n/image/upload/v1772703797/yash_xepmb0.jpg",
     specialty: "UI/UX Design",
     bio: "Crafting beautiful and intuitive user experiences that delight users and drive engagement.",
     skills: ["Figma", "Adobe XD", "Design Systems", "Prototyping"],
@@ -41,7 +41,7 @@ const team = [
   {
     name: "Team Member",
     role: "Tech Lead",
-    image: "/images/team3.jpg",
+    image: "https://res.cloudinary.com/dave3np5n/image/upload/v1772704021/falgun_isotwa.jpg",
     specialty: "System Architecture",
     bio: "Building scalable and robust systems that power modern applications with cutting-edge technology.",
     skills: ["Cloud Architecture", "DevOps", "Microservices", "Security"],
